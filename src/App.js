@@ -3,6 +3,8 @@ import Navbar from "./components/layout/Navbar";
 import Hero from "./components/sections/Hero";
 import About from "./components/sections/About";
 import Services from "./components/sections/Services";
+import WhyChooseUs from "./components/sections/WhyChooseUs";
+import OurBestServices from "./components/sections/OurBestServices";
 import Testimonials from "./components/sections/Testimonials";
 import Contact from "./components/sections/Contact";
 import Footer from "./components/layout/Footer";
@@ -16,7 +18,9 @@ function App() {
       <About />
       <Services />
       <Testimonials />
-      <Contact />
+      <WhyChooseUs />
+      <OurBestServices />
+      {/* <Contact /> */}
       <Footer />
     </div>
   );
