@@ -9,21 +9,22 @@ const About = () => {
   return (
     <section id="about" className="bg-white">
       {/* Stats Section */}
-      <div className="bg-[#4a0404] bg-opacity-90 py-6 sm:py-8">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
-              <div className="relative">
-                <svg className="w-16 sm:w-20 h-16 sm:h-20">
+      <div className="bg-[#4a0404] bg-opacity-90 py-8 sm:py-10">
+        <div className="w-full max-w-[1800px] mx-auto px-6 lg:px-12 overflow-hidden">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8 w-full md:w-auto">
+              <div className="relative flex-shrink-0">
+                <svg className="w-24 sm:w-20 h-24 sm:h-20">
                   <circle
-                    cx="40"
-                    cy="40"
-                    r="35"
+                    cx="48"
+                    cy="48"
+                    r="42"
                     stroke="#ff4d4d"
                     strokeWidth="5"
                     fill="none"
                     strokeDasharray="220"
                     strokeDashoffset="55"
+                    className="sm:scale-75"
                   />
                   <text
                     x="50%"
@@ -31,18 +32,20 @@ const About = () => {
                     textAnchor="middle"
                     dy=".3em"
                     fill="white"
-                    className="text-lg sm:text-xl font-bold"
+                    className="text-2xl sm:text-xl font-bold"
                   >
                     85%
                   </text>
                 </svg>
               </div>
-              <div>
-                <h3 className="text-lg sm:text-xl font-semibold text-white">
+              <div className="text-center sm:text-left">
+                <h3 className="text-xl sm:text-2xl font-semibold text-white leading-tight mb-2">
                   We Provide More Details Let Me Know Solution
                 </h3>
-                <p className="text-gray-400 text-sm">What You Need Help</p>
-                <p className="text-gray-400 mt-2 text-sm max-w-2xl">
+                <p className="text-gray-300 text-base sm:text-sm">
+                  What You Need Help
+                </p>
+                <p className="text-gray-400 mt-3 text-sm leading-relaxed max-w-xl">
                   Technology is a broad category encompassing information
                   technology and the application of technology.
                 </p>
@@ -51,7 +54,7 @@ const About = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-darkBg px-4 sm:px-6 py-2 sm:py-3 rounded text-sm hover:bg-opacity-90 transition-all duration-300"
+              className="w-full sm:w-auto bg-white text-darkBg px-6 sm:px-8 py-3 sm:py-3.5 rounded-md text-base font-medium hover:bg-opacity-90 transition-all duration-300 text-center"
             >
               CONTACT US →
             </motion.button>
@@ -60,27 +63,27 @@ const About = () => {
       </div>
 
       {/* About Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-24">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="space-y-6 sm:space-y-8"
+            className="space-y-8 sm:space-y-10"
           >
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <img src={aboutIcon} alt="About Icon" className="w-8 h-2" />
-                <span className="uppercase text-xs sm:text-sm text-gray-500">
+              <div className="flex items-center gap-3 mb-6">
+                <img src={aboutIcon} alt="About Icon" className="w-10 h-2.5" />
+                <span className="uppercase text-sm sm:text-base text-gray-500 tracking-wide">
                   ABOUT US
                 </span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                 Who Are We?
               </h2>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 We are a passionate team of creative and tech-savvy individuals
                 who love what we do. With expertise in media, IT, and marketing
                 tech niches, we bring our unique skills to the table. Together,
@@ -89,35 +92,35 @@ const About = () => {
               </p>
             </div>
 
-            <div className="space-y-4 sm:space-y-6">
-              <div className="flex items-start gap-4">
+            <div className="space-y-6 sm:space-y-8">
+              <div className="flex items-start gap-5">
                 <img
                   src={missionIcon}
                   alt="Mission"
-                  className="w-6 sm:w-8 h-6 sm:h-8 mt-1"
+                  className="w-8 sm:w-10 h-8 sm:h-10 mt-1"
                 />
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">
                     Our Mission
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-base leading-relaxed">
                     To provide collaborative solutions and transparent business
                     practices that help our clients achieve their goals.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
+              <div className="flex items-start gap-5">
                 <img
                   src={historyIcon}
                   alt="History"
-                  className="w-6 sm:w-8 h-6 sm:h-8 mt-1"
+                  className="w-8 sm:w-10 h-8 sm:h-10 mt-1"
                 />
                 <div>
-                  <h3 className="font-semibold text-gray-900 mb-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">
                     Our History
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 text-base leading-relaxed">
                     We've grown from collaboration with a vision to bridge the
                     gap between technology and business needs.
                   </p>
@@ -125,10 +128,10 @@ const About = () => {
               </div>
             </div>
 
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
                 <svg
-                  className="w-4 h-4 text-primary"
+                  className="w-5 h-5 text-[#4a0404]"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -138,13 +141,13 @@ const About = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="text-gray-700 text-sm">
+                <span className="text-gray-700 text-base sm:text-lg">
                   Free Project Consultations
                 </span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
                 <svg
-                  className="w-4 h-4 text-primary"
+                  className="w-5 h-5 text-[#4a0404]"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -154,7 +157,7 @@ const About = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="text-gray-700 text-sm">
+                <span className="text-gray-700 text-base sm:text-lg">
                   Customer-Centered Approach
                 </span>
               </div>
@@ -163,7 +166,7 @@ const About = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#4a0404] text-white text-xs sm:text-sm px-4 sm:px-6 py-2 rounded hover:bg-opacity-90 transition-all duration-300"
+              className="w-full sm:w-auto bg-[#4a0404] text-white text-base font-medium px-8 py-3 rounded-md hover:bg-opacity-90 transition-all duration-300"
             >
               READ MORE →
             </motion.button>
@@ -180,11 +183,13 @@ const About = () => {
             <img
               src={aboutImage}
               alt="Team Collaboration"
-              className="w-full sm:w-[300px] md:w-[400px] h-auto sm:h-[400px] md:h-[500px] object-cover rounded-lg"
+              className="w-full max-w-[400px] md:max-w-[500px] h-[400px] sm:h-[500px] md:h-[600px] object-cover rounded-lg shadow-xl"
             />
-            <div className="absolute bottom-4 right-4 bg-[#4a0404] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded">
-              <span className="text-lg sm:text-xl font-bold">25+</span>
-              <span className="text-xs sm:text-sm block">Years Experience</span>
+            <div className="absolute bottom-6 right-6 bg-[#4a0404] text-white px-6 py-4 rounded-lg shadow-lg">
+              <span className="text-2xl sm:text-3xl font-bold">25+</span>
+              <span className="text-sm sm:text-base block mt-1">
+                Years Experience
+              </span>
             </div>
           </motion.div>
         </div>

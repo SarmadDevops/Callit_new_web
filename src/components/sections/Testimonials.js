@@ -62,22 +62,31 @@ const Testimonials = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToShow: 3,
+    slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
     arrows: false,
     responsive: [
       {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          centerMode: false,
+          dots: true,
         },
       },
     ],
     customPaging: () => (
-      <div className="w-2 h-2 bg-[#4a0404] rounded-full mt-8"></div>
+      <div className="w-2.5 h-2.5 bg-[#4a0404] rounded-full mt-8 sm:mt-10"></div>
     ),
   };
 
@@ -86,22 +95,23 @@ const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-20 relative"
+      className="py-16 sm:py-20 lg:py-24 relative"
       style={{
         backgroundImage: `url(${testimonialbg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 flex flex-col items-center">
-          <h4 className="text-white uppercase text-sm mb-2">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 overflow-hidden">
+        <div className="text-center mb-12 sm:mb-16 flex flex-col items-center">
+          <h4 className="text-white uppercase text-sm sm:text-base font-medium tracking-wider mb-3 sm:mb-4">
             OUR TESTIMONIALS
           </h4>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            The Positive Experiences Of Our Clients.
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+            The Positive Experiences
+            <br className="hidden sm:block" /> Of Our Clients.
           </h2>
-          <p className="text-gray-300 max-w-2xl">
+          <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
             Hear from our satisfied clients as they share their experiences with
             our services, highlighting our professionalism.
           </p>
@@ -113,14 +123,14 @@ const Testimonials = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="testimonials-slider"
+            className="testimonials-slider px-2 sm:px-4"
           >
             <Slider ref={sliderRef} {...settings} dots={false}>
               {testimonials.map((testimonial, index) => (
-                <div key={index} className="px-4">
-                  <div className="bg-[#1A1A1A] rounded-lg p-8">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-16 h-16 rounded-full overflow-hidden">
+                <div key={index} className="px-2">
+                  <div className="bg-[#1A1A1A] rounded-xl p-6 sm:p-8 shadow-lg transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 mx-auto h-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px]">
+                    <div className="flex flex-col items-center text-center gap-4 mb-6">
+                      <div className="w-20 h-20 rounded-full overflow-hidden shadow-md flex-shrink-0">
                         <img
                           src={testimonial.image}
                           alt={testimonial.name}
@@ -128,13 +138,15 @@ const Testimonials = () => {
                         />
                       </div>
                       <div>
-                        <h3 className="text-white font-semibold text-lg">
+                        <h3 className="text-white font-semibold text-xl mb-1">
                           {testimonial.name}
                         </h3>
-                        <p className="text-gray-400">{testimonial.position}</p>
+                        <p className="text-gray-400 text-base">
+                          {testimonial.position}
+                        </p>
                       </div>
                     </div>
-                    <div className="flex mb-4">
+                    <div className="flex justify-center gap-1 mb-6">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <svg
                           key={i}
@@ -146,7 +158,9 @@ const Testimonials = () => {
                         </svg>
                       ))}
                     </div>
-                    <p className="text-gray-300">{testimonial.content}</p>
+                    <p className="text-gray-300 text-base leading-relaxed text-center">
+                      {testimonial.content}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -156,15 +170,15 @@ const Testimonials = () => {
           {/* Custom Navigation Buttons */}
           <button
             onClick={() => sliderRef.current?.slickPrev()}
-            className="absolute left-[-60px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+            className="absolute left-0 sm:left-[-20px] lg:left-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
           >
-            <span className="text-2xl leading-none">&larr;</span>
+            <span className="text-xl sm:text-2xl leading-none">&larr;</span>
           </button>
           <button
             onClick={() => sliderRef.current?.slickNext()}
-            className="absolute right-[-60px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+            className="absolute right-0 sm:right-[-20px] lg:right-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
           >
-            <span className="text-2xl leading-none">&rarr;</span>
+            <span className="text-xl sm:text-2xl leading-none">&rarr;</span>
           </button>
         </div>
       </div>

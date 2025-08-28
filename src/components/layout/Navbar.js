@@ -27,7 +27,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed w-full z-50 flex justify-center pt-2 sm:pt-4">
+    <div className="fixed w-full z-50 flex justify-center pt-1 sm:pt-2 md:pt-4">
       <div className="relative w-[98%] sm:w-[95%] md:w-[90%] lg:w-[85%] max-w-[1000px]">
         <motion.nav
           initial={{ y: -100 }}
@@ -36,14 +36,14 @@ const Navbar = () => {
             scrolled ? "shadow-lg" : ""
           }`}
         >
-          <div className="px-3 sm:px-4 md:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-14 sm:h-16">
+          <div className="px-2 sm:px-4 md:px-6 lg:px-8">
+            <div className="flex justify-between items-center h-12 sm:h-14 md:h-16">
               {/* Logo */}
               <div className="flex items-center">
                 <img
                   src={logo}
                   alt="Call IT Studio"
-                  className="h-5 sm:h-6 md:h-8"
+                  className="h-4 sm:h-5 md:h-6 lg:h-8"
                 />
               </div>
 
@@ -75,11 +75,12 @@ const Navbar = () => {
               {/* Mobile Menu Button */}
               <div className="md:hidden">
                 <button
-                  className="text-white p-1.5"
+                  className="text-white p-1 sm:p-1.5"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  aria-label="Toggle mobile menu"
                 >
                   <svg
-                    className="h-5 w-5"
+                    className="h-4 w-4 sm:h-5 sm:w-5"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -107,20 +108,20 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 mt-2 bg-[#4a0404] bg-opacity-95 backdrop-blur-sm rounded-lg md:hidden overflow-hidden"
+              className="absolute top-full left-0 right-0 mt-1 sm:mt-2 bg-[#4a0404] bg-opacity-95 backdrop-blur-sm rounded-lg shadow-lg md:hidden overflow-hidden"
             >
-              <div className="py-2 px-3">
-                <div className="flex flex-col space-y-2">
+              <div className="py-3 px-4">
+                <div className="flex flex-col space-y-2.5">
                   {navItems.map((item) => (
                     <Link
                       key={item.name}
                       to={item.to}
                       spy={true}
                       smooth={true}
-                      offset={-100}
+                      offset={-80}
                       duration={500}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`text-xs px-3 py-1.5 rounded-sm transition-all duration-300 w-fit ${
+                      className={`text-[13px] px-4 py-2 rounded transition-all duration-300 w-full text-center ${
                         activeSection === item.to
                           ? "bg-white text-[#4a0404] font-medium"
                           : "text-white hover:bg-white hover:bg-opacity-20"
@@ -129,7 +130,7 @@ const Navbar = () => {
                       {item.name}
                     </Link>
                   ))}
-                  <button className="bg-white text-[#4a0404] text-xs px-3 py-1.5 rounded-sm hover:bg-opacity-90 transition-all duration-300 w-fit">
+                  <button className="bg-white text-[#4a0404] text-[13px] px-4 py-2 rounded w-full hover:bg-opacity-90 transition-all duration-300 font-medium">
                     CONTACT US →
                   </button>
                 </div>
