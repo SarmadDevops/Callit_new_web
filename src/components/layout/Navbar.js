@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
+import { Link as RouterLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Reset active section when on different pages
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === "/") {
+      setActiveSection("home");
+    } else if (path === "/events") {
+      setActiveSection("/events");
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,11 +30,11 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "Home", to: "home" },
-    { name: "About Us", to: "about" },
-    { name: "Services", to: "services" },
-    { name: "Projects", to: "projects" },
-    { name: "Events", to: "events" },
+    { name: "Home", to: "home", type: "scroll" },
+    { name: "About Us", to: "about", type: "scroll" },
+    { name: "Services", to: "services", type: "scroll" },
+    { name: "Projects", to: "projects", type: "scroll" },
+    { name: "Events", to: "/events", type: "route" },
   ];
 
   return (
@@ -49,24 +60,39 @@ const Navbar = () => {
 
               {/* Desktop Navigation */}
               <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.to}
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={500}
-                    onSetActive={() => setActiveSection(item.to)}
-                    className={`text-xs lg:text-sm cursor-pointer px-2 lg:px-4 py-1.5 lg:py-2 rounded transition-all duration-300 ${
-                      activeSection === item.to
-                        ? "bg-[#4a0404] text-white font-medium"
-                        : "text-white hover:bg-[#4a0404] hover:bg-opacity-50"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                {navItems.map((item) =>
+                  item.type === "scroll" ? (
+                    <ScrollLink
+                      key={item.name}
+                      to={item.to}
+                      spy={true}
+                      smooth={true}
+                      offset={-100}
+                      duration={500}
+                      onSetActive={() => setActiveSection(item.to)}
+                      className={`text-xs lg:text-sm cursor-pointer px-2 lg:px-4 py-1.5 lg:py-2 rounded transition-all duration-300 ${
+                        activeSection === item.to
+                          ? "bg-[#4a0404] text-white font-medium"
+                          : "text-white hover:bg-[#4a0404] hover:bg-opacity-50"
+                      }`}
+                    >
+                      {item.name}
+                    </ScrollLink>
+                  ) : (
+                    <RouterLink
+                      key={item.name}
+                      to={item.to}
+                      onClick={() => setActiveSection(item.to)}
+                      className={`text-xs lg:text-sm cursor-pointer px-2 lg:px-4 py-1.5 lg:py-2 rounded transition-all duration-300 ${
+                        activeSection === item.to
+                          ? "bg-[#4a0404] text-white font-medium"
+                          : "text-white hover:bg-[#4a0404] hover:bg-opacity-50"
+                      }`}
+                    >
+                      {item.name}
+                    </RouterLink>
+                  )
+                )}
                 <button className="bg-[#4a0404] text-white text-xs px-3 lg:px-4 py-1.5 lg:py-2 rounded hover:bg-opacity-90 transition-all duration-300 ml-2">
                   CONTACT US →
                 </button>
@@ -112,24 +138,42 @@ const Navbar = () => {
             >
               <div className="py-3 px-4">
                 <div className="flex flex-col space-y-2.5">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.to}
-                      spy={true}
-                      smooth={true}
-                      offset={-80}
-                      duration={500}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`text-[13px] px-4 py-2 rounded transition-all duration-300 w-full text-center ${
-                        activeSection === item.to
-                          ? "bg-white text-[#4a0404] font-medium"
-                          : "text-white hover:bg-white hover:bg-opacity-20"
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
+                  {navItems.map((item) =>
+                    item.type === "scroll" ? (
+                      <ScrollLink
+                        key={item.name}
+                        to={item.to}
+                        spy={true}
+                        smooth={true}
+                        offset={-80}
+                        duration={500}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`text-[13px] px-4 py-2 rounded transition-all duration-300 w-full text-center ${
+                          activeSection === item.to
+                            ? "bg-white text-[#4a0404] font-medium"
+                            : "text-white hover:bg-white hover:bg-opacity-20"
+                        }`}
+                      >
+                        {item.name}
+                      </ScrollLink>
+                    ) : (
+                      <RouterLink
+                        key={item.name}
+                        to={item.to}
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          setActiveSection(item.to);
+                        }}
+                        className={`text-[13px] px-4 py-2 rounded transition-all duration-300 w-full text-center ${
+                          activeSection === item.to
+                            ? "bg-white text-[#4a0404] font-medium"
+                            : "text-white hover:bg-white hover:bg-opacity-20"
+                        }`}
+                      >
+                        {item.name}
+                      </RouterLink>
+                    )
+                  )}
                   <button className="bg-white text-[#4a0404] text-[13px] px-4 py-2 rounded w-full hover:bg-opacity-90 transition-all duration-300 font-medium">
                     CONTACT US →
                   </button>

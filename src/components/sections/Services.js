@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import mediaImg from "../../assets/media.png";
-import contentImg from "../../assets/content.png";
-import marketingImg from "../../assets/marketing.png";
-import bulbImg from "../../assets/bulb.png";
+import { useNavigate } from "react-router-dom";
+import { services } from "../../data/services";
 
 const Services = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [windowWidth, setWindowWidth] = useState(
@@ -26,51 +25,6 @@ const Services = () => {
     if (windowWidth >= 768) return 2;
     return 1;
   };
-
-  const services = [
-    {
-      title: "Media",
-      image: mediaImg,
-      description:
-        "Digital media solutions to help reach your target audience with creative content",
-      icon: bulbImg,
-    },
-    {
-      title: "Content Writing",
-      image: contentImg,
-      description:
-        "Create high-quality content that tells your story and engages your audience",
-      icon: bulbImg,
-    },
-    {
-      title: "Marketing",
-      image: marketingImg,
-      description:
-        "Marketing strategies to grow your business and reach new customers",
-      icon: bulbImg,
-    },
-    {
-      title: "Digital Media",
-      image: mediaImg,
-      description:
-        "Advanced digital solutions for modern business needs and creative outputs",
-      icon: bulbImg,
-    },
-    {
-      title: "Technical Writing",
-      image: contentImg,
-      description:
-        "Professional documentation and technical content creation services",
-      icon: bulbImg,
-    },
-    {
-      title: "Digital Marketing",
-      image: marketingImg,
-      description:
-        "Comprehensive digital marketing solutions for online business growth",
-      icon: bulbImg,
-    },
-  ];
 
   const nextSlide = () => {
     const cardsPerView = getCardsPerView();
@@ -118,7 +72,14 @@ const Services = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] transform hover:-translate-y-1"
+                    className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] transform hover:-translate-y-1 cursor-pointer"
+                    onClick={() =>
+                      navigate(
+                        `/service/${service.title
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`
+                      )
+                    }
                   >
                     {/* Service Image Container */}
                     <div className="relative">

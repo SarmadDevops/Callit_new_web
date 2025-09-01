@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import social from "../../assets/social.png";
 import DVC from "../../assets/DVC.png";
 import product from "../../assets/product.png";
 
 const OurBestServices = () => {
+  const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
@@ -97,7 +99,14 @@ const OurBestServices = () => {
                 {visibleServices.map((service, index) => (
                   <div
                     key={currentIndex + index}
-                    className="relative group overflow-hidden rounded-xl shadow-lg transition-all duration-300 mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] transform hover:-translate-y-1"
+                    className="relative group overflow-hidden rounded-xl shadow-lg transition-all duration-300 mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] transform hover:-translate-y-1 cursor-pointer"
+                    onClick={() =>
+                      navigate(
+                        `/service/${service.title
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`
+                      )
+                    }
                   >
                     <div className="relative h-[220px] sm:h-[240px] lg:h-[260px] overflow-hidden">
                       <img
