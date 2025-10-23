@@ -44,43 +44,91 @@ const Events = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Sidebar - Upcoming Events */}
           <div className="space-y-6">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-4">
-                Upcoming Event List
-              </h3>
-              <ul className="space-y-4">
-                {[
-                  { id: "moosic-goosic", name: "MOOSIC GOOSIC" },
-                  { id: "14-august", name: "14 August" },
-                  { id: "6-september", name: "6 September" },
-                  { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
-                  { id: "mango-day", name: "Mango Day" },
-                ].map((event) => (
-                  <li
-                    key={event.id}
-                    onClick={() => navigate(`/events/${event.id}`)}
-                    className="flex justify-between items-center cursor-pointer hover:bg-gray-50 rounded px-2 py-1 transition-colors"
-                  >
-                    <span className="text-gray-800">{event.name}</span>
-                    <svg
-                      className="w-4 h-4 text-gray-600"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+            <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-md p-8 relative overflow-hidden">
+              {/* Subtle texture overlay */}
+              <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-gray-300 to-gray-400"></div>
+
+              {/* White card inside gray background */}
+               <div className="bg-white rounded-lg shadow-sm p-6 relative z-10">
+                <h3 className="text-lg font-semibold mb-4 text-gray-800">
+                  Upcoming Event List
+                </h3>
+                <ul className="space-y-4">
+                  {[
+                    { id: "NAQSH-E-GOONJ", name: "NAQSH-E-GOONJ" },
+                    { id: "14-august", name: "14 August" },
+                    { id: "6-september", name: "6 September" },
+                    { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
+                    { id: "mango-day", name: "Mango Day" },
+                  ].map((event) => (
+                    <li
+                      key={event.id}
+                      onClick={() => navigate(`/events/${event.id}`)}
+                      className={`flex justify-between items-center cursor-pointer rounded px-3 py-2 transition-colors 
+                           hover:bg-gray-50 text-gray-800`}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </li>
-                ))}
-              </ul>
-              <button className="mt-6 w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition-colors">
-                VIEW ALL EVENTS
-              </button>
+                      <span>{event.name}</span>
+                      <svg
+                        className={`w-4 h-4 ${
+                          event.id === "NAQSH-E-GOONJ"
+                            ? "text-white"
+                            : "text-gray-600"
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="text-lg font-semibold mb-4 text-gray-800 pt-4">
+                  Previous Events List
+                </h3>
+                <ul className="space-y-4">
+                  {[
+                    { id: "NAQSH-E-GOONJ", name: "NAQSH-E-GOONJ" },
+                    { id: "14-august", name: "14 August" },
+                    { id: "6-september", name: "6 September" },
+                    { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
+                    { id: "mango-day", name: "Mango Day" },
+                  ].map((event) => (
+                    <li
+                      key={event.id}
+                      onClick={() => navigate(`/events/${event.id}`)}
+                      className={`flex justify-between items-center cursor-pointer rounded px-3 py-2 transition-colors  hover:bg-gray-50 text-gray-800`}
+                    >
+                      <span>{event.name}</span>
+                      <svg
+                        className={`w-4 h-4 ${
+                          event.id === "NAQSH-E-GOONJ"
+                            ? "text-white"
+                            : "text-gray-600"
+                        }`}
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </li>
+                  ))}
+                </ul>
+                <button className="mt-6 w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition-colors shadow-md">
+                  VIEW ALL EVENTS
+                </button>
+              </div>
             </div>
 
             {/* Testimonial Card */}
@@ -121,19 +169,57 @@ const Events = () => {
             </div>
 
             {/* Have Any Query Card */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h3 className="text-lg font-semibold mb-4">Have Any Query</h3>
-              <div className="relative">
-                <img
-                  src="https://placehold.co/400x300"
-                  alt="Support"
-                  className="w-full rounded-lg"
-                />
-                <div className="absolute bottom-4 left-4">
-                  <p className="text-white text-sm">
-                    Need help? Contact us today!
-                  </p>
-                  <p className="text-white font-bold">+88 510 515 51</p>
+            <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg shadow-md p-8 relative overflow-hidden">
+              {/* Subtle texture overlay */}
+              <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-gray-300 to-gray-400"></div>
+
+              {/* White card inside gray background */}
+              <div className="bg-white rounded-lg shadow-sm relative z-10 overflow-hidden">
+                <div className="absolute top-4 left-4 z-20">
+                  <h3 className="text-lg font-semibold text-white drop-shadow-lg">
+                    Have Any Query
+                  </h3>
+                </div>
+
+                <div className="relative h-100">
+                  {/* Support Image covering entire card */}
+                  <img
+                    src="/img1.png"
+                    alt="Support Representative"
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+
+                  {/* Overlay Content */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/30 rounded-lg"></div>
+                  <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white text-center">
+                    <p className="text-sm font-medium mb-2">Have Questions?</p>
+                    <p className="text-sm opacity-90 mb-4">
+                      Nothing stops us from doing what we like
+                    </p>
+
+                    {/* Phone Number - Centered with White Background */}
+                    <div className="flex items-center justify-center gap-3 bg-white rounded-full px-6 py-3 mx-auto shadow-md min-w-fit whitespace-nowrap">
+                      <div className="w-6 h-6 bg-[#4a0404] rounded-full flex items-center justify-center flex-shrink-0">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-3 w-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                      </div>
+                      <span className="text-sm font-medium text-gray-800">
+                        +88 010 513 51
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

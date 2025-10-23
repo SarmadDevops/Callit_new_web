@@ -1,23 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import ContactPopup from "../ContactPopup";
 
 const Navbar = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
 
   // Reset active section when on different pages
   useEffect(() => {
-    const path = window.location.pathname;
+    const path = location.pathname;
     if (path === "/") {
       setActiveSection("home");
     } else if (path === "/events") {
       setActiveSection("/events");
+    } else {
+      setActiveSection(""); // Reset for other pages
     }
-  }, []);
+  }, [location.pathname]); // Now properly using useLocation hook
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +35,28 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Handle navigation to home page sections
+  const handleSectionNavigation = (sectionId) => {
+    if (location.pathname === "/") {
+      // If already on home page, just scroll to section
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+        setActiveSection(sectionId);
+      }
+    } else {
+      // If on different page, navigate to home first, then scroll
+      navigate("/");
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+          setActiveSection(sectionId);
+        }
+      }, 100); // Small delay to ensure page loads
+    }
+  };
+
   const navItems = [
     { name: "Home", to: "home", type: "scroll" },
     { name: "About Us", to: "about", type: "scroll" },
@@ -39,7 +67,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed w-full z-50 flex justify-center pt-1 sm:pt-2 md:pt-4">
-      <div className="relative w-[98%] sm:w-[95%] md:w-[90%] lg:w-[85%] max-w-[1000px]">
+      <div className="relative w-[98%] sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-[1275px]">
         <motion.nav
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -62,22 +90,36 @@ const Navbar = () => {
               <div className="hidden md:flex items-center space-x-2 lg:space-x-4">
                 {navItems.map((item) =>
                   item.type === "scroll" ? (
-                    <ScrollLink
-                      key={item.name}
-                      to={item.to}
-                      spy={true}
-                      smooth={true}
-                      offset={-100}
-                      duration={500}
-                      onSetActive={() => setActiveSection(item.to)}
-                      className={`text-xs lg:text-sm cursor-pointer px-2 lg:px-4 py-1.5 lg:py-2 rounded transition-all duration-300 ${
-                        activeSection === item.to
-                          ? "bg-[#4a0404] text-white font-medium"
-                          : "text-white hover:bg-[#4a0404] hover:bg-opacity-50"
-                      }`}
-                    >
-                      {item.name}
-                    </ScrollLink>
+                    location.pathname === "/" ? (
+                      <ScrollLink
+                        key={item.name}
+                        to={item.to}
+                        spy={true}
+                        smooth={true}
+                        offset={-100}
+                        duration={500}
+                        onSetActive={() => setActiveSection(item.to)}
+                        className={`text-xs lg:text-sm cursor-pointer px-2 lg:px-4 py-1.5 lg:py-2 rounded transition-all duration-300 ${
+                          activeSection === item.to
+                            ? "bg-[#4a0404] text-white font-medium"
+                            : "text-white hover:bg-[#4a0404] hover:bg-opacity-50"
+                        }`}
+                      >
+                        {item.name}
+                      </ScrollLink>
+                    ) : (
+                      <button
+                        key={item.name}
+                        onClick={() => handleSectionNavigation(item.to)}
+                        className={`text-xs lg:text-sm cursor-pointer px-2 lg:px-4 py-1.5 lg:py-2 rounded transition-all duration-300 ${
+                          activeSection === item.to
+                            ? "bg-[#4a0404] text-white font-medium"
+                            : "text-white hover:bg-[#4a0404] hover:bg-opacity-50"
+                        }`}
+                      >
+                        {item.name}
+                      </button>
+                    )
                   ) : (
                     <RouterLink
                       key={item.name}
@@ -93,7 +135,13 @@ const Navbar = () => {
                     </RouterLink>
                   )
                 )}
-                <button className="bg-[#4a0404] text-white text-xs px-3 lg:px-4 py-1.5 lg:py-2 rounded hover:bg-opacity-90 transition-all duration-300 ml-2">
+                <button 
+                  className="bg-[#4a0404] text-white text-xs px-3 lg:px-4 py-1.5 lg:py-2 rounded hover:bg-opacity-90 transition-all duration-300 ml-2"
+                  onClick={() => {
+                    console.log("Contact button clicked - Desktop");
+                    setIsContactPopupOpen(true);
+                  }}
+                >
                   CONTACT US →
                 </button>
               </div>
@@ -140,22 +188,39 @@ const Navbar = () => {
                 <div className="flex flex-col space-y-2.5">
                   {navItems.map((item) =>
                     item.type === "scroll" ? (
-                      <ScrollLink
-                        key={item.name}
-                        to={item.to}
-                        spy={true}
-                        smooth={true}
-                        offset={-80}
-                        duration={500}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className={`text-[13px] px-4 py-2 rounded transition-all duration-300 w-full text-center ${
-                          activeSection === item.to
-                            ? "bg-white text-[#4a0404] font-medium"
-                            : "text-white hover:bg-white hover:bg-opacity-20"
-                        }`}
-                      >
-                        {item.name}
-                      </ScrollLink>
+                      location.pathname === "/" ? (
+                        <ScrollLink
+                          key={item.name}
+                          to={item.to}
+                          spy={true}
+                          smooth={true}
+                          offset={-80}
+                          duration={500}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className={`text-[13px] px-4 py-2 rounded transition-all duration-300 w-full text-center ${
+                            activeSection === item.to
+                              ? "bg-white text-[#4a0404] font-medium"
+                              : "text-white hover:bg-white hover:bg-opacity-20"
+                          }`}
+                        >
+                          {item.name}
+                        </ScrollLink>
+                      ) : (
+                        <button
+                          key={item.name}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            handleSectionNavigation(item.to);
+                          }}
+                          className={`text-[13px] px-4 py-2 rounded transition-all duration-300 w-full text-center ${
+                            activeSection === item.to
+                              ? "bg-white text-[#4a0404] font-medium"
+                              : "text-white hover:bg-white hover:bg-opacity-20"
+                          }`}
+                        >
+                          {item.name}
+                        </button>
+                      )
                     ) : (
                       <RouterLink
                         key={item.name}
@@ -174,7 +239,14 @@ const Navbar = () => {
                       </RouterLink>
                     )
                   )}
-                  <button className="bg-white text-[#4a0404] text-[13px] px-4 py-2 rounded w-full hover:bg-opacity-90 transition-all duration-300 font-medium">
+                  <button 
+                    className="bg-white text-[#4a0404] text-[13px] px-4 py-2 rounded w-full hover:bg-opacity-90 transition-all duration-300 font-medium"
+                    onClick={() => {
+                      console.log("Contact button clicked - Mobile");
+                      setIsMobileMenuOpen(false);
+                      setIsContactPopupOpen(true);
+                    }}
+                  >
                     CONTACT US →
                   </button>
                 </div>
@@ -183,6 +255,16 @@ const Navbar = () => {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Contact Popup */}
+      {console.log("ContactPopup render check:", { isContactPopupOpen })}
+      <ContactPopup 
+        isOpen={isContactPopupOpen}
+        onClose={() => {
+          console.log("ContactPopup close called");
+          setIsContactPopupOpen(false);
+        }}
+      />
     </div>
   );
 };

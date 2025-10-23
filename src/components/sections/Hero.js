@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import bgImage from "../../assets/bg.png";
 import heroRight from "../../assets/hero-right.png";
+import ContactPopup from "../ContactPopup";
 
 const Hero = () => {
+  const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
+
   return (
     <section id="home" className="relative min-h-screen overflow-hidden">
       {/* Background Image with Overlay */}
@@ -51,6 +54,10 @@ const Hero = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-white text-darkBg px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base font-medium rounded-md hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center"
+                  onClick={() => {
+                    console.log("Get Started button clicked - Hero page");
+                    setIsContactPopupOpen(true);
+                  }}
                 >
                   GET STARTED →
                 </motion.button>
@@ -80,6 +87,15 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Popup */}
+      <ContactPopup
+        isOpen={isContactPopupOpen}
+        onClose={() => {
+          console.log("ContactPopup close called from Hero page");
+          setIsContactPopupOpen(false);
+        }}
+      />
     </section>
   );
 };

@@ -1,33 +1,33 @@
 import React, { useState } from "react";
-import whychoseimg from "../../assets/whychoseimg.png";
-import initial from "../../assets/initial.png";
-import detailed from "../../assets/detailed.png";
-import selection from "../../assets/selection.png";
+// import whychoseimg from "../../assets/whychoseimg.png";
+// import initial from "../../assets/initial.png";
+// import detailed from "../../assets/detailed.png";
+// import selection from "../../assets/selection.png";
 import dumimg from "../../assets/dumimg.png";
 
 const WhyChooseUs = () => {
   const [openQuestion, setOpenQuestion] = useState(null);
-  const steps = [
-    {
-      title: "Initial Consultation and Assessment",
-      icon: initial,
-    },
-    {
-      title: "Detailed Estimate and Planning",
-      icon: detailed,
-    },
-    {
-      title: "Selection and Preparation",
-      icon: selection,
-    },
-  ];
+  // const steps = [
+  //   {
+  //     title: "Initial Consultation and Assessment",
+  //     icon: initial,
+  //   },
+  //   {
+  //     title: "Detailed Estimate and Planning",
+  //     icon: detailed,
+  //   },
+  //   {
+  //     title: "Selection and Preparation",
+  //     icon: selection,
+  //   },
+  // ];
 
-  const services = [
-    "Team Support",
-    "Business Management",
-    "Business Delivery",
-    "Consulting & Solution",
-  ];
+  // const services = [
+  //   "Team Support",
+  //   "Business Management",
+  //   "Business Delivery",
+  //   "Consulting & Solution",
+  // ];
 
   return (
     <>
@@ -36,7 +36,7 @@ const WhyChooseUs = () => {
           <div className="flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-16">
             {/* Left Content - Form */}
             <div className="w-full lg:w-1/2 xl:w-[45%]">
-              <div className="max-w-[500px] lg:max-w-none bg-white p-6 sm:p-8 shadow-lg rounded-lg mx-auto">
+              <div className="max-w-[500px] lg:max-w-none bg-white p-6 sm:p-8 shadow-lg rounded-lg mx-auto xl:ml-6">
                 <div className="flex items-center gap-3 mb-4">
                   <svg
                     className="w-4 h-4 text-[#4a0404]"
@@ -105,19 +105,19 @@ const WhyChooseUs = () => {
                       TRUSTED BEST COMPANY
                     </p>
                   </div>
-                  <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 leading-tight text-[#1A1A1A]">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 leading-tight text-[#1A1A1A] xl:ml-4">
                     We Help You Build On
                     <br className="hidden sm:block" />
                     Your Past & Future.
                   </h2>
-                  <p className="text-[#666666] text-base sm:text-lg lg:text-xl mb-8 max-w-[600px]">
+                  <p className="text-[#666666] text-base sm:text-lg lg:text-xl mb-8 max-w-[600px] xl:ml-6">
                     We strongly support best practice sharing across our
                     operations around the world and across various industrial
                   </p>
                 </div>
 
                 {/* FAQ Accordion */}
-                <div className="space-y-4 max-w-[800px]">
+                <div className="space-y-4 max-w-[633px] xl:ml-6">
                   <div className="border border-gray-200 rounded-lg bg-white shadow-sm">
                     <button
                       className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200 text-lg"
@@ -125,7 +125,7 @@ const WhyChooseUs = () => {
                         setOpenQuestion(openQuestion === 1 ? null : 1)
                       }
                     >
-                      <span className="font-medium text-base sm:text-lg text-[#1A1A1A]">
+                      <span className="font-medium text-base sm:text-lg text-[#1A1A1A] ">
                         How can I take your service?
                       </span>
                       <svg
@@ -248,8 +248,8 @@ const WhyChooseUs = () => {
 
       {/* Contact Info Bar */}
       <section className="py-8 sm:py-12 bg-white">
-        <div className="w-full max-w-[1400px] mx-auto px-6 lg:px-12">
-          <div className="bg-[#4a0404] rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 relative overflow-hidden">
+        <div className="w-full max-w-[1350px] mx-auto px-6 lg:px-12">
+          <div className="bg-[#4a0404] rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 relative overflow-hidden ">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 max-w-5xl mx-auto relative z-10">
               <div className="text-white lg:w-[45%]">
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 sm:mb-3">

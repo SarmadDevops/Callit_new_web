@@ -102,7 +102,7 @@ const Testimonials = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 overflow-hidden">
+      <div className="w-[98%] sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-[1350px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 overflow-hidden">
         <div className="text-center mb-12 sm:mb-16 flex flex-col items-center">
           <h4 className="text-white uppercase text-sm sm:text-base font-medium tracking-wider mb-3 sm:mb-4">
             OUR TESTIMONIALS
@@ -117,7 +117,7 @@ const Testimonials = () => {
           </p>
         </div>
 
-        <div className="relative">
+        <div className="relative px-8 sm:px-12 lg:px-16">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -170,13 +170,13 @@ const Testimonials = () => {
           {/* Custom Navigation Buttons */}
           <button
             onClick={() => sliderRef.current?.slickPrev()}
-            className="absolute left-0 sm:left-[-20px] lg:left-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+            className="absolute left-0 sm:left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
           >
             <span className="text-xl sm:text-2xl leading-none">&larr;</span>
           </button>
           <button
             onClick={() => sliderRef.current?.slickNext()}
-            className="absolute right-0 sm:right-[-20px] lg:right-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+            className="absolute right-0 sm:right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 sm:w-12 h-10 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
           >
             <span className="text-xl sm:text-2xl leading-none">&rarr;</span>
           </button>

@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "callitstudio-f8e3b"
-  }
+    "default": "callitweb-25c85",
+    "callitnewweb": "callitweb-25c85"
+  },
+  "targets": {},
+  "etags": {}
 }

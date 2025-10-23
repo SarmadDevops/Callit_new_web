@@ -79,7 +79,7 @@ const OurBestServices = () => {
     <>
       {/* Services Section */}
       <section className="py-12 sm:py-16 bg-white">
-        <div className="w-full max-w-[1800px] mx-auto px-6 lg:px-12 relative">
+        <div className="w-[98%] sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-[1350px] mx-auto px-6 lg:px-12 relative">
           <div className="text-center mb-10 sm:mb-12">
             <div className="flex items-center justify-center gap-3 mb-3">
               <div className="h-[1px] w-6 bg-[#4a0404]"></div>
@@ -94,7 +94,7 @@ const OurBestServices = () => {
           </div>
 
           <div className="relative">
-            <div className="mx-auto max-w-[1400px]">
+            <div className="mx-auto px-12 sm:px-16 lg:px-20">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 {visibleServices.map((service, index) => (
                   <div
@@ -129,13 +129,13 @@ const OurBestServices = () => {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-2 sm:left-[-20px] lg:left-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+              className="absolute left-0 sm:left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
             >
               <span className="text-xl sm:text-2xl leading-none">&larr;</span>
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-2 sm:right-[-20px] lg:right-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+              className="absolute right-0 sm:right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
             >
               <span className="text-xl sm:text-2xl leading-none">&rarr;</span>
             </button>
@@ -145,7 +145,7 @@ const OurBestServices = () => {
 
       {/* Bottom CTA Section */}
       <section className="bg-black py-12 sm:py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-[98%] sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-full mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h3 className="text-sm sm:text-base uppercase text-white tracking-wider mb-3">
               LET'S TRY! GET FREE SUPPORT

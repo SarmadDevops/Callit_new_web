@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { services } from "../../data/services";
@@ -6,19 +6,42 @@ import { services } from "../../data/services";
 const Services = () => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
+      const newWidth = window.innerWidth;
+      console.log("Window resized to:", newWidth);
+      setWindowWidth(newWidth);
     };
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    // Trigger initial resize check
+    handleResize();
+
+    // Also listen for orientation changes on mobile
+    window.addEventListener("orientationchange", () => {
+      setTimeout(handleResize, 100);
+    });
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
   }, []);
+
+  // Reset currentIndex when screen size changes to ensure proper display
+  useEffect(() => {
+    setCurrentIndex(0);
+    // Force a small delay to ensure state updates properly
+    const timer = setTimeout(() => {
+      setCurrentIndex(0);
+    }, 10);
+
+    return () => clearTimeout(timer);
+  }, [windowWidth]);
 
   const getCardsPerView = () => {
     if (windowWidth >= 1024) return 3;
@@ -28,7 +51,6 @@ const Services = () => {
 
   const nextSlide = () => {
     const cardsPerView = getCardsPerView();
-    setDirection(1);
     setCurrentIndex((prevIndex) =>
       prevIndex + cardsPerView >= services.length ? 0 : prevIndex + cardsPerView
     );
@@ -36,7 +58,6 @@ const Services = () => {
 
   const prevSlide = () => {
     const cardsPerView = getCardsPerView();
-    setDirection(-1);
     setCurrentIndex((prevIndex) =>
       prevIndex - cardsPerView < 0
         ? Math.floor(services.length / cardsPerView) * cardsPerView -
@@ -49,21 +70,51 @@ const Services = () => {
   const totalPages = Math.ceil(services.length / cardsPerView);
   const currentPage = Math.floor(currentIndex / cardsPerView);
 
+  // Enhanced debug logging
+  console.log("=== Services Carousel Debug ===");
+  console.log("Window Width:", windowWidth);
+  console.log("Cards Per View:", cardsPerView);
+  console.log("Current Index:", currentIndex);
+  console.log("Services Length:", services.length);
+  console.log(
+    "Displaying services:",
+    currentIndex,
+    "to",
+    currentIndex + cardsPerView
+  );
+  console.log(
+    "Grid classes:",
+    cardsPerView === 1
+      ? "grid-cols-1"
+      : cardsPerView === 2
+      ? "grid-cols-2"
+      : "grid-cols-3"
+  );
+  console.log("============================");
+
   return (
     <section id="services" className="py-12 sm:py-16 bg-white">
-      <div className="w-full max-w-[1800px] mx-auto px-6 lg:px-12 relative">
+      <div className="w-[98%] sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-[1350px] mx-auto px-6 lg:px-12 relative">
         {/* Section Title */}
         <div className="text-center mb-10 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-3">
             Services We Offered
           </h2>
-          <div className="w-16 sm:w-20 h-1 bg-[#4a0404] mx-auto"></div>
+          <div className="w-16 sm:w-20 h-1 bg-[#4a0404] mx-auto "></div>
         </div>
 
         {/* Services Grid with Navigation Arrows */}
         <div className="relative">
-          <div className="mx-auto max-w-[1400px]">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="mx-auto px-12 sm:px-16 lg:px-20">
+            <div
+              className={`grid gap-6 sm:gap-8 ${
+                cardsPerView === 1
+                  ? "grid-cols-1"
+                  : cardsPerView === 2
+                  ? "grid-cols-2"
+                  : "grid-cols-3"
+              } justify-items-center`}
+            >
               {services
                 .slice(currentIndex, currentIndex + cardsPerView)
                 .map((service, index) => (
@@ -72,7 +123,7 @@ const Services = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative mx-auto w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] transform hover:-translate-y-1 cursor-pointer"
+                    className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative mx-auto w-full max-w-[400px] transform hover:-translate-y-1 cursor-pointer"
                     onClick={() =>
                       navigate(
                         `/service/${service.title
@@ -119,13 +170,13 @@ const Services = () => {
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-2 sm:left-[-20px] lg:left-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+            className="absolute left-0 sm:left-2 lg:left-4 top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
           >
             <span className="text-xl sm:text-2xl leading-none">&larr;</span>
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-2 sm:right-[-20px] lg:right-[-40px] top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
+            className="absolute right-0 sm:right-2 lg:right-4 top-1/2 transform -translate-y-1/2 bg-[#4a0404] text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-90 transition-all duration-300 z-10 focus:outline-none"
           >
             <span className="text-xl sm:text-2xl leading-none">&rarr;</span>
           </button>
@@ -140,8 +191,7 @@ const Services = () => {
                 currentPage === index ? "bg-[#4a0404] w-6" : "bg-gray-300"
               }`}
               onClick={() => {
-                setDirection(index > currentPage ? 1 : -1);
-                setCurrentIndex(index * 3);
+                setCurrentIndex(index * cardsPerView);
               }}
             ></button>
           ))}
