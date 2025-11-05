@@ -4,19 +4,19 @@ import footerBg from "../../assets/Footer.png";
 
 const Footer = () => {
   const quickLinks = [
-    { title: "Why choose us", href: "#" },
-    { title: "Our Service", href: "#" },
-    { title: "Partners", href: "#" },
-    { title: "Core values", href: "#" },
-    { title: "Our projects", href: "#" },
+    { title: "Why choose us", href: "/about" },
+    { title: "Our Service", href: "/services" },
+    { title: "Partners", href: "/about" },
+    { title: "Core values", href: "/about" },
+    { title: "Our projects", href: "/projects" },
   ];
 
   const quickLink2 = [
-    { title: "Gallery", href: "#" },
-    { title: "Packages", href: "#" },
-    { title: "Team", href: "#" },
-    { title: "Contact", href: "#" },
-    { title: "News", href: "#" },
+    { title: "Gallery", href: "/gallery" },
+    { title: "Packages", href: "/services" },
+    { title: "Team", href: "/about" },
+    { title: "Contact", href: "/contact" },
+    { title: "News", href: "/news" },
   ];
 
   return (
@@ -43,25 +43,33 @@ const Footer = () => {
             </p>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
               >
                 <i className="fab fa-facebook-f text-lg"></i>
               </a>
               <a
-                href="#"
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
               >
                 <i className="fab fa-twitter text-lg"></i>
               </a>
               <a
-                href="#"
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
               >
                 <i className="fab fa-youtube text-lg"></i>
               </a>
               <a
-                href="#"
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
               >
                 <i className="fab fa-linkedin-in text-lg"></i>
@@ -143,25 +151,25 @@ const Footer = () => {
             </p>
             <div className="flex flex-wrap justify-center sm:justify-end gap-6 sm:gap-8">
               <a
-                href="#"
+                href="/about"
                 className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
               >
                 About Us
               </a>
               <a
-                href="#"
+                href="/services"
                 className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
               >
                 Services
               </a>
               <a
-                href="#"
+                href="/news"
                 className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
               >
                 News
               </a>
               <a
-                href="#"
+                href="/portfolio"
                 className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
               >
                 Portfolio

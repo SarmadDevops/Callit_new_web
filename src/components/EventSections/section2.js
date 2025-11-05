@@ -1,14 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import EventInfo from "./EventCards/eventinfo";
-import BookingTicketsCard from "./EventCards/bookingticketscard,";
+//import { useNavigate } from "react-router-dom";
+// import EventInfo from "./EventCards/eventinfo";
+// import BookingTicketsCard from "./EventCards/bookingticketscard,";
+
 const EventSection2 = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   return (
     <>
-    {/* Main Event Content - Single column */}
+      {/* Main Event Content - Single column */}
       <div className="lg:col-span-6">
-        <div className="bg-white rounded-lg shadow-md p-6">
-          {/* Back to Events Link */}
+        {/*
+         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="mb-6">
             <button
               onClick={() => navigate("/events")}
@@ -32,6 +33,16 @@ const EventSection2 = () => {
           </div>
           <EventInfo />
           <BookingTicketsCard />
+        </div>
+        */}
+
+        {/* Event Image - Added from line 36 */}
+        <div className="mb-8">
+          <img
+            src="/goonjimage1.png"
+            alt="NAQSH-E-GOONJ Event"
+            className="w-full h-[1000px] object-cover rounded-lg shadow-lg"
+          />
         </div>
       </div>
     </>

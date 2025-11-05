@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import eventBg from "../assets/eventbg.png";
 import eventImage from "../assets/event.jpg";
 
@@ -17,17 +17,7 @@ const Events = () => {
         }}
       >
         {/* Breadcrumb */}
-        <div className="absolute top-1/3 left-0 right-0">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 text-white/80 text-sm mb-4">
-              <Link to="/" className="hover:text-white">
-                Home
-              </Link>
-              <span>/</span>
-              <span>All Events</span>
-            </div>
-          </div>
-        </div>
+       
 
         {/* Hero Content */}
         <div className="text-center text-white z-10 mt-8">
@@ -49,28 +39,40 @@ const Events = () => {
               <div className="absolute inset-0 opacity-5 bg-gradient-to-br from-gray-300 to-gray-400"></div>
 
               {/* White card inside gray background */}
-               <div className="bg-white rounded-lg shadow-sm p-6 relative z-10">
+              <div className="bg-white rounded-lg shadow-sm p-6 relative z-10">
                 <h3 className="text-lg font-semibold mb-4 text-gray-800">
                   Upcoming Event List
                 </h3>
                 <ul className="space-y-4">
                   {[
-                    { id: "NAQSH-E-GOONJ", name: "NAQSH-E-GOONJ" },
-                    { id: "14-august", name: "14 August" },
-                    { id: "6-september", name: "6 September" },
-                    { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
-                    { id: "mango-day", name: "Mango Day" },
+                    { id: "NAQSH-E-GOONJ", name: "NAQSH-E-GOONJ 2.0" },
+                    // { id: "14-august", name: "14 August" },
+                    // { id: "6-september", name: "6 September" },
+                    // { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
+                    // { id: "mango-day", name: "Mango Day" },
                   ].map((event) => (
                     <li
                       key={event.id}
-                      onClick={() => navigate(`/events/${event.id}`)}
-                      className={`flex justify-between items-center cursor-pointer rounded px-3 py-2 transition-colors 
-                           hover:bg-gray-50 text-gray-800`}
+                      onClick={() => {
+                        if (event.id === "NAQSH-E-GOONJ") {
+                          navigate(`/events/${event.id}`);
+                        }
+                        // Other events don't navigate anywhere
+                      }}
+                      className={`flex justify-between items-center ${
+                        event.id === "NAQSH-E-GOONJ" ? "cursor-pointer" : ""
+                      } rounded px-3 py-2 transition-colors ${
+                        window.location.pathname === `/events/${event.id}`
+                          ? "bg-[#4a0404] text-white shadow-md"
+                          : event.id === "NAQSH-E-GOONJ"
+                          ? "hover:bg-gray-50 text-gray-800"
+                          : "text-gray-800"
+                      }`}
                     >
                       <span>{event.name}</span>
                       <svg
                         className={`w-4 h-4 ${
-                          event.id === "NAQSH-E-GOONJ"
+                          window.location.pathname === `/events/${event.id}`
                             ? "text-white"
                             : "text-gray-600"
                         }`}
@@ -93,21 +95,55 @@ const Events = () => {
                 </h3>
                 <ul className="space-y-4">
                   {[
-                    { id: "NAQSH-E-GOONJ", name: "NAQSH-E-GOONJ" },
-                    { id: "14-august", name: "14 August" },
-                    { id: "6-september", name: "6 September" },
-                    { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
-                    { id: "mango-day", name: "Mango Day" },
+                    {
+                      id: "NAQSH-E-GOONJ",
+                      name: "NAQSH-E-GOONJ",
+                      type: "previous",
+                    },
+                    {
+                      id: "FASANA-E-ISHQ",
+                      name: "FASANA-E-ISHQ",
+                      type: "previous",
+                    },
                   ].map((event) => (
                     <li
                       key={event.id}
-                      onClick={() => navigate(`/events/${event.id}`)}
-                      className={`flex justify-between items-center cursor-pointer rounded px-3 py-2 transition-colors  hover:bg-gray-50 text-gray-800`}
+                      onClick={() => {
+                        if (
+                          event.id === "NAQSH-E-GOONJ" &&
+                          event.type === "previous"
+                        ) {
+                          navigate(`/previous-events/${event.id}`);
+                        } else if (
+                          event.id === "FASANA-E-ISHQ" &&
+                          event.type === "previous"
+                        ) {
+                          navigate(`/fasana-e-ishq`);
+                        }
+                        // Other events don't navigate anywhere
+                      }}
+                      className={`flex justify-between items-center ${
+                        event.id === "NAQSH-E-GOONJ" ||
+                        event.id === "FASANA-E-ISHQ"
+                          ? "cursor-pointer"
+                          : ""
+                      } rounded px-3 py-2 transition-colors ${
+                        window.location.pathname ===
+                          `/previous-events/${event.id}` ||
+                        (event.id === "FASANA-E-ISHQ" &&
+                          window.location.pathname === "/fasana-e-ishq")
+                          ? "bg-[#4a0404] text-white shadow-md"
+                          : event.id === "NAQSH-E-GOONJ" ||
+                            event.id === "FASANA-E-ISHQ"
+                          ? "hover:bg-gray-50 text-gray-800"
+                          : "text-gray-800"
+                      }`}
                     >
                       <span>{event.name}</span>
                       <svg
                         className={`w-4 h-4 ${
-                          event.id === "NAQSH-E-GOONJ"
+                          window.location.pathname ===
+                          `/previous-events/${event.id}`
                             ? "text-white"
                             : "text-gray-600"
                         }`}
@@ -228,10 +264,7 @@ const Events = () => {
           {/* Right Content - Event Cards */}
           <div className="md:col-span-2 space-y-6">
             {/* Featured Event */}
-            <div
-              className="relative rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => navigate("/events/comedy-night")}
-            >
+            <div className="relative rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
               <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded">
                 LIVE
               </div>
@@ -275,8 +308,7 @@ const Events = () => {
               ].map((event) => (
                 <div
                   key={event.id}
-                  className="rounded-xl overflow-hidden shadow-md cursor-pointer hover:shadow-lg transition-shadow"
-                  onClick={() => navigate(`/events/${event.id}`)}
+                  className="rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
                 >
                   <img
                     src={eventImage}

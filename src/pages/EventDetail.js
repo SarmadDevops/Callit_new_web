@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
+
 import eventBg from "../assets/eventbg.png";
 
 import EventSection1 from "../components/EventSections/section1";
 import EventSection2 from "../components/EventSections/section2";
 import TicketBookingPopup from "../components/TicketBookingPopup";
 import { useState } from "react";
-import EventSection3 from "../components/EventSections/section3";
+// import EventSection3 from "../components/EventSections/section3";
 
 const EventDetail = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -27,21 +27,7 @@ const EventDetail = () => {
         }}
       >
         {/* Breadcrumb */}
-        <div className="absolute top-1/3 left-0 right-0">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 text-white/80 text-sm mb-4">
-              <Link to="/" className="hover:text-white">
-                Home
-              </Link>
-              <span>/</span>
-              <Link to="/events" className="hover:text-white">
-                Events
-              </Link>
-              <span>/</span>
-              <span>UPCOMING EVENTS</span>
-            </div>
-          </div>
-        </div>
+        
         {/* Hero Content */}
         <div className="text-center text-white z-10 mt-8">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
@@ -59,7 +45,7 @@ const EventDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <EventSection1 />
           <EventSection2 />
-          <EventSection3 />
+          {/* <EventSection3 /> */}
         </div>
       </div>
       {/* Dark Contact Section */}
