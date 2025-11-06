@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import bgImage from "../../assets/bg.png";
 import heroRight from "../../assets/hero-right.png";
 import ContactPopup from "../ContactPopup";
+import { Link } from "react-scroll";
 
 const Hero = () => {
   const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
@@ -50,24 +51,24 @@ const Hero = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-white text-darkBg px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base font-medium rounded-md hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center"
-                  onClick={() => {
-                    console.log("Get Started button clicked - Hero page");
-                    setIsContactPopupOpen(true);
-                  }}
-                >
-                  GET STARTED →
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base font-medium rounded-md hover:bg-white hover:text-darkBg transition-all duration-300 flex items-center justify-center"
-                >
-                  LEARN MORE →
-                </motion.button>
+                <Link to="about" smooth={true} duration={800} offset={-70}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-white text-darkBg px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base font-medium rounded-md hover:bg-opacity-90 transition-all duration-300 flex items-center justify-center"
+                  >
+                    GET STARTED →
+                  </motion.button>
+                </Link>
+                <Link to="about" smooth={true} duration={800} offset={-70}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base font-medium rounded-md hover:bg-white hover:text-darkBg transition-all duration-300 flex items-center justify-center"
+                  >
+                    LEARN MORE →
+                  </motion.button>
+                </Link>
               </div>
             </motion.div>
 

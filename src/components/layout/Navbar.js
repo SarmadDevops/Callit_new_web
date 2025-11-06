@@ -61,7 +61,7 @@ const Navbar = () => {
     { name: "Home", to: "home", type: "scroll" },
     { name: "About Us", to: "about", type: "scroll" },
     { name: "Services", to: "services", type: "scroll" },
-    { name: "Projects", to: "projects", type: "scroll" },
+   
     { name: "Events", to: "/events", type: "route" },
   ];
 

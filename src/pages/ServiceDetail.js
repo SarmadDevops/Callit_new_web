@@ -12,6 +12,16 @@ const ServiceDetail = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleLearnMoreClick = () => {
+    navigate("/");
+    setTimeout(() => {
+      document.getElementById("about")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  };
+
   // Find the current service
   const currentService = services.find(
     (service) =>
@@ -296,7 +306,10 @@ const ServiceDetail = () => {
             to save we form by injected finance solution.
           </p>
           <div className="flex justify-center gap-4 mb-8">
-            <button className="bg-[#4a0404] text-white px-6 py-2 rounded-md flex items-center gap-2">
+            <button
+              onClick={handleLearnMoreClick}
+              className="bg-[#4a0404] text-white px-6 py-2 rounded-md flex items-center gap-2"
+            >
               LEARN MORE
               <span className="text-xl">→</span>
             </button>

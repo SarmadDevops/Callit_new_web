@@ -1,24 +1,50 @@
-import React from "react";
+import { Link } from "react-scroll";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import footerBg from "../../assets/Footer.png";
 
 const Footer = () => {
-  const quickLinks = [
-    { title: "Why choose us", href: "#" },
-    { title: "Our Service", href: "#" },
-    { title: "Partners", href: "#" },
-    { title: "Core values", href: "#" },
-    { title: "Our projects", href: "#" },
-  ];
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
 
-  const quickLink2 = [
-    { title: "Gallery", href: "#" },
-    { title: "Packages", href: "#" },
-    { title: "Team", href: "#" },
-    { title: "Contact", href: "#" },
-    { title: "News", href: "#" },
-  ];
+  const handleAboutClick = () => {
+    if (isHomePage) {
+      // If on home page, just scroll
+      document.getElementById("about")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Navigate to home page first, then scroll after a short delay
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById("about")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  };
 
+  const handleServicesClick = () => {
+    if (isHomePage) {
+      // If on home page, just scroll
+      document.getElementById("services")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Navigate to home page first, then scroll after a short delay
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById("services")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  };
   return (
     <footer
       className="relative bg-black text-white pt-12 sm:pt-16 lg:pt-20 pb-8"
@@ -28,40 +54,40 @@ const Footer = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 justify-items-center">
           {/* Logo and Description */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+          <div className="text-center lg:text-left">
             <img
               src={logo}
               alt="Call IT Studio"
-              className="h-10 sm:h-12 mb-6"
+              className="h-10 sm:h-12 mb-6 mx-auto lg:mx-0"
             />
-            <p className="text-base sm:text-lg text-gray-300 mb-8 max-w-md lg:max-w-none">
+            <p className="text-base sm:text-lg text-gray-300 mb-8 max-w-md">
               Will give you a complete account the system, and expound the
               teachings of the great explorer the truth, the master-builder.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center lg:justify-start">
               <a
-                href="#"
+                href="https://www.facebook.com/share/1Ap2mhJdnS/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
               >
                 <i className="fab fa-facebook-f text-lg"></i>
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/callitstudio?igsh=MWd6eGlvZnV0ZHZlNg=="
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
               >
-                <i className="fab fa-twitter text-lg"></i>
+                <i className="fab fa-instagram text-lg"></i>
               </a>
               <a
-                href="#"
-                className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
-              >
-                <i className="fab fa-youtube text-lg"></i>
-              </a>
-              <a
-                href="#"
+                href="https://www.linkedin.com/company/call-it-studio/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
               >
                 <i className="fab fa-linkedin-in text-lg"></i>
@@ -69,66 +95,33 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Service Links */}
-          <div className="col-span-1">
-            <h3 className="text-white text-lg sm:text-xl font-semibold mb-6">
-              Service
-            </h3>
-            <ul className="space-y-4">
-              {quickLinks.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors text-base sm:text-lg block"
-                  >
-                    {link.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Quick Links */}
-          <div className="col-span-1">
-            <h3 className="text-white text-lg sm:text-xl font-semibold mb-6">
-              Quick Link
-            </h3>
-            <ul className="space-y-4">
-              {quickLink2.map((link, index) => (
-                <li key={index}>
-                  <a
-                    href={link.href}
-                    className="text-gray-300 hover:text-white transition-colors text-base sm:text-lg block"
-                  >
-                    {link.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Contact Info */}
-          <div className="col-span-1">
+          <div className="text-center lg:text-left">
             <h3 className="text-white text-lg sm:text-xl font-semibold mb-6">
               Contact Us
             </h3>
             <ul className="space-y-6">
-              <li className="flex items-start gap-4">
+              <li className="flex items-start gap-4 justify-center lg:justify-start">
                 <i className="fas fa-map-marker-alt mt-1.5 text-lg text-gray-300"></i>
-                <span className="text-base sm:text-lg text-gray-300">
-                  520, West Valley, Arvin and mann
-                </span>
+                <a
+                  href="https://maps.google.com/?q=H96C+9XM,+Peer+Muhammad+Sadiq+Rd+Mughalpura,+Lahore,+54840"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors cursor-pointer"
+                >
+                  H96C+9XM, Peer Muhammad Sadiq Rd Mughalpura, Lahore, 54840
+                </a>
               </li>
-              <li className="flex items-center gap-4">
+              <li className="flex items-center gap-4 justify-center lg:justify-start">
                 <i className="fas fa-phone-alt text-lg text-gray-300"></i>
                 <span className="text-base sm:text-lg text-gray-300">
-                  +91 123654789
+                  042-3682-7666
                 </span>
               </li>
-              <li className="flex items-center gap-4">
+              <li className="flex items-center gap-4 justify-center lg:justify-start">
                 <i className="fas fa-envelope text-lg text-gray-300"></i>
                 <span className="text-base sm:text-lg text-gray-300">
-                  info@domainname.com
+                  contact@callit-studio.com
                 </span>
               </li>
             </ul>
@@ -137,36 +130,60 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="mt-12 sm:mt-16 pt-8 border-t border-gray-800">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-            <p className="text-base sm:text-lg text-gray-300 text-center sm:text-left">
-              © Copyright 2023 by CallitStudio
-            </p>
-            <div className="flex flex-wrap justify-center sm:justify-end gap-6 sm:gap-8">
-              <a
-                href="#"
-                className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
+          <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
+              {isHomePage ? (
+                <Link
+                  to="about"
+                  smooth={true}
+                  duration={800}
+                  offset={-70}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  About Us
+                </Link>
+              ) : (
+                <button
+                  onClick={handleAboutClick}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer bg-transparent border-none"
+                >
+                  About Us
+                </button>
+              )}
+              {isHomePage ? (
+                <Link
+                  to="services"
+                  smooth={true}
+                  duration={800}
+                  offset={-70}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Services
+                </Link>
+              ) : (
+                <button
+                  onClick={handleServicesClick}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer bg-transparent border-none"
+                >
+                  Services
+                </button>
+              )}
+              <RouterLink
+                to="/privacy-policy"
+                className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap"
               >
-                About Us
-              </a>
-              <a
-                href="#"
-                className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
+                Privacy Policy
+              </RouterLink>
+              <RouterLink
+                to="/terms-conditions"
+                className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap"
               >
-                Services
-              </a>
-              <a
-                href="#"
-                className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
-              >
-                News
-              </a>
-              <a
-                href="#"
-                className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors"
-              >
-                Portfolio
-              </a>
+                Terms & Conditions
+              </RouterLink>
             </div>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-300 text-center">
+              © Copyright 2025 by CallitStudio
+            </p>
           </div>
         </div>
       </div>
