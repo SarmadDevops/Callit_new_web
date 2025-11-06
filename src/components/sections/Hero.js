@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import bgImage from "../../assets/bg.png";
 import heroRight from "../../assets/hero-right.png";
@@ -60,13 +60,15 @@ const Hero = () => {
                     GET STARTED →
                   </motion.button>
                 </Link>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base font-medium rounded-md hover:bg-white hover:text-darkBg transition-all duration-300 flex items-center justify-center"
-                >
-                  LEARN MORE →
-                </motion.button>
+                <Link to="about" smooth={true} duration={800} offset={-70}>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-transparent border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-3 text-sm sm:text-base font-medium rounded-md hover:bg-white hover:text-darkBg transition-all duration-300 flex items-center justify-center"
+                  >
+                    LEARN MORE →
+                  </motion.button>
+                </Link>
               </div>
             </motion.div>
 

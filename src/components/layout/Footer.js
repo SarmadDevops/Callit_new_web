@@ -1,9 +1,50 @@
 import { Link } from "react-scroll";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import footerBg from "../../assets/Footer.png";
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === "/";
+
+  const handleAboutClick = () => {
+    if (isHomePage) {
+      // If on home page, just scroll
+      document.getElementById("about")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Navigate to home page first, then scroll after a short delay
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById("about")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  };
+
+  const handleServicesClick = () => {
+    if (isHomePage) {
+      // If on home page, just scroll
+      document.getElementById("services")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Navigate to home page first, then scroll after a short delay
+      navigate("/");
+      setTimeout(() => {
+        document.getElementById("services")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 100);
+    }
+  };
   return (
     <footer
       className="relative bg-black text-white pt-12 sm:pt-16 lg:pt-20 pb-8"
@@ -36,7 +77,7 @@ const Footer = () => {
                 <i className="fab fa-facebook-f text-lg"></i>
               </a>
               <a
-              href="https://www.instagram.com/callitstudio?igsh=MWd6eGlvZnV0ZHZlNg=="
+                href="https://www.instagram.com/callitstudio?igsh=MWd6eGlvZnV0ZHZlNg=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
@@ -44,7 +85,7 @@ const Footer = () => {
                 <i className="fab fa-instagram text-lg"></i>
               </a>
               <a
-          href="https://www.linkedin.com/company/call-it-studio/"
+                href="https://www.linkedin.com/company/call-it-studio/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full border-2 border-gray-600 flex items-center justify-center hover:border-white hover:bg-white/10 transition-all duration-300"
@@ -91,24 +132,42 @@ const Footer = () => {
         <div className="mt-12 sm:mt-16 pt-8 border-t border-gray-800">
           <div className="flex flex-col items-center gap-4">
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 lg:gap-8">
-              <Link
-                to="about"
-                smooth={true}
-                duration={800}
-                offset={-70}
-                className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
-              >
-                About Us
-              </Link>
-              <Link
-                to="services"
-                smooth={true}
-                duration={800}
-                offset={-70}
-                className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
-              >
-                Services
-              </Link>
+              {isHomePage ? (
+                <Link
+                  to="about"
+                  smooth={true}
+                  duration={800}
+                  offset={-70}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  About Us
+                </Link>
+              ) : (
+                <button
+                  onClick={handleAboutClick}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer bg-transparent border-none"
+                >
+                  About Us
+                </button>
+              )}
+              {isHomePage ? (
+                <Link
+                  to="services"
+                  smooth={true}
+                  duration={800}
+                  offset={-70}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+                >
+                  Services
+                </Link>
+              ) : (
+                <button
+                  onClick={handleServicesClick}
+                  className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap cursor-pointer bg-transparent border-none"
+                >
+                  Services
+                </button>
+              )}
               <RouterLink
                 to="/privacy-policy"
                 className="text-sm sm:text-base lg:text-lg text-gray-300 hover:text-white transition-colors whitespace-nowrap"

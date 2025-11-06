@@ -22,8 +22,7 @@ const TestimonialCard = () => {
 
               {/* Testimonial Text */}
               <p className="text-center text-white/90 mb-6 text-sm leading-relaxed">
-                Neque porro est qui dolorem ipsum quia quaed inventore veritatis
-                et
+               Excellent design and project management , the team delivered exactly what we needed with great attention to detail.
               </p>
 
               {/* Author Section */}

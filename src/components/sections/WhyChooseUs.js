@@ -330,11 +330,7 @@ const WhyChooseUs = () => {
                     </div>
                   </div>
                 </div>
-                <img
-                  src={dumimg}
-                  alt="Contact Support"
-                  className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-xl hidden lg:block mx-auto lg:mx-0"
-                />
+               
               </div>
             </div>
             <div className="absolute right-0 top-0 h-full w-1/3 bg-white/5 rounded-l-full"></div>

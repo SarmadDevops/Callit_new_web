@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import eventBg from "../assets/eventbg.png";
 import UpcomingEvents from "../components/EventSections/EventCards/upcomingevents";
 
 const PreviousEventDetail = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleLearnMoreClick = () => {
+    navigate("/");
+    setTimeout(() => {
+      document.getElementById("about")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -67,8 +81,7 @@ const PreviousEventDetail = () => {
                   </svg>
                 </div>
                 <p className="text-sm text-white/90 mb-6">
-                  Neque porro est qui dolorem ipsum quia quaed inventore
-                  veritatis et
+                 Excellent design and project management , the team delivered exactly what we needed with great attention to detail.
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
@@ -141,7 +154,7 @@ const PreviousEventDetail = () => {
                           </svg>
                         </div>
                         <span className="text-sm font-medium text-gray-800">
-                          +88 010 513 51
+                          042-3682-7666
                         </span>
                       </div>
                     </div>
@@ -327,6 +340,46 @@ const PreviousEventDetail = () => {
                   <span className="text-gray-900">Humanity Alliance Org</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Dark Contact Section */}
+      <div className="bg-black w-full">
+        <div className="container mx-auto text-white py-16 text-center">
+          <p className="text-sm text-gray-400 mb-2">
+            LET'S TRY! GET FREE SUPPORT
+          </p>
+          <h2 className="text-2xl font-bold mb-3">
+            Get Our Any Service And Contact Now!
+          </h2>
+          <p className="text-sm text-gray-400 mb-8">
+            Business tailored design, management & support services Business
+            <br />
+            to save we form by injected finance solution.
+          </p>
+          <div className="flex justify-center gap-4 mb-8">
+            <button
+              onClick={handleLearnMoreClick}
+              className="bg-[#4a0404] text-white px-6 py-2 rounded-md flex items-center gap-2"
+            >
+              LEARN MORE
+              <span className="text-xl">→</span>
+            </button>
+          </div>
+          <div className="flex justify-center items-center gap-8">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span className="text-sm">Business Solution</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span className="text-sm">Team Support</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-white rounded-full"></div>
+              <span className="text-sm">Free 24/7 Support</span>
             </div>
           </div>
         </div>

@@ -1,14 +1,29 @@
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import eventBg from "../assets/eventbg.png";
 
 import EventSection1 from "../components/EventSections/section1";
 import EventSection2 from "../components/EventSections/section2";
 import TicketBookingPopup from "../components/TicketBookingPopup";
-import { useState } from "react";
 // import EventSection3 from "../components/EventSections/section3";
 
 const EventDetail = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleLearnMoreClick = () => {
+    navigate("/");
+    setTimeout(() => {
+      document.getElementById("about")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
+  };
 
   const eventData = {
     name: "NAQSH-E-GOONJ",
@@ -27,7 +42,7 @@ const EventDetail = () => {
         }}
       >
         {/* Breadcrumb */}
-        
+
         {/* Hero Content */}
         <div className="text-center text-white z-10 mt-8">
           <h1 className="text-4xl sm:text-5xl font-bold mb-4">
@@ -63,32 +78,12 @@ const EventDetail = () => {
             to save we form by injected finance solution.
           </p>
           <div className="flex justify-center gap-4 mb-8">
-            <button className="bg-[#4a0404] text-white px-6 py-2 rounded-md flex items-center gap-2">
+            <button
+              onClick={handleLearnMoreClick}
+              className="bg-[#4a0404] text-white px-6 py-2 rounded-md flex items-center gap-2"
+            >
               LEARN MORE
               <span className="text-xl">→</span>
-            </button>
-            <button className="bg-white/10 text-white px-4 py-2 rounded-full flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              WATCH VIDEO
             </button>
           </div>
           <div className="flex justify-center items-center gap-8">

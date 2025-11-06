@@ -9,51 +9,25 @@ import dumimg from "../../assets/dumimg.png";
 const Testimonials = () => {
   const testimonials = [
     {
-      name: "Roman Boris",
-      position: "Manager",
-      image: dumimg,
+      name: "BEESCREATIONS",
+
       content:
-        "Business design, management & testimonial business agency edit excellent response in some we form by rejected addition.",
+        "Working with Call IT Studio has been an amazing experience. Their understanding of our audience and the creativity in content creation resulted in significant growth. I couldn’t be happier with the results.",
       rating: 5,
     },
     {
       name: "Roman Boris",
-      position: "Manager",
+
       image: dumimg,
       content:
-        "Business design, management & testimonial business agency edit excellent response in some we form by rejected addition.",
+        "Excellent design and project management , the team delivered exactly what we needed with great attention to detail.",
       rating: 5,
     },
     {
-      name: "Sarah Johnson",
-      position: "Marketing Director",
-      image: dumimg,
+      name: "Suitcase Travels",
+
       content:
-        "Business design, management & testimonial business agency edit excellent response in some we form by rejected addition.",
-      rating: 5,
-    },
-    {
-      name: "Michael Chen",
-      position: "Creative Lead",
-      image: dumimg,
-      content:
-        "Business design, management & testimonial business agency edit excellent response in some we form by rejected addition.",
-      rating: 5,
-    },
-    {
-      name: "Emma Davis",
-      position: "Project Manager",
-      image: dumimg,
-      content:
-        "Business design, management & testimonial business agency edit excellent response in some we form by rejected addition.",
-      rating: 5,
-    },
-    {
-      name: "Alex Thompson",
-      position: "Senior Developer",
-      image: dumimg,
-      content:
-        "Business design, management & testimonial business agency edit excellent response in some we form by rejected addition.",
+        "Call IT Studio helped us double our social media engagement in just a few months. The content was exactly what we needed, and their strategy was spot on.",
       rating: 5,
     },
   ];
@@ -128,15 +102,17 @@ const Testimonials = () => {
             <Slider ref={sliderRef} {...settings} dots={false}>
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="px-2">
-                  <div className="bg-[#1A1A1A] rounded-xl p-6 sm:p-8 shadow-lg transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 mx-auto h-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px]">
+                  <div className="bg-[#1A1A1A] rounded-xl p-6 sm:p-8 shadow-lg transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1 mx-auto h-[400px] max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] flex flex-col">
                     <div className="flex flex-col items-center text-center gap-4 mb-6">
-                      <div className="w-20 h-20 rounded-full overflow-hidden shadow-md flex-shrink-0">
-                        <img
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      {index === 1 && testimonial.image && (
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
                       <div>
                         <h3 className="text-white font-semibold text-xl mb-1">
                           {testimonial.name}
@@ -158,9 +134,11 @@ const Testimonials = () => {
                         </svg>
                       ))}
                     </div>
-                    <p className="text-gray-300 text-base leading-relaxed text-center">
-                      {testimonial.content}
-                    </p>
+                    <div className="flex-1 flex items-start">
+                      <p className="text-gray-300 text-base leading-relaxed text-center overflow-hidden">
+                        {testimonial.content}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}

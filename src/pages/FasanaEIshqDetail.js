@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import eventBg from "../assets/eventbg.png";
 import UpcomingEvents from "../components/EventSections/EventCards/upcomingevents";
 
 const FasanaEIshqDetail = () => {
   //   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -65,8 +69,7 @@ const FasanaEIshqDetail = () => {
                   </svg>
                 </div>
                 <p className="text-sm text-white/90 mb-6">
-                  Neque porro est qui dolorem ipsum quia quaed inventore
-                  veritatis et
+               Excellent design and project management,the team delivered exactly what we needed with great attention to detail.
                 </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
@@ -139,7 +142,7 @@ const FasanaEIshqDetail = () => {
                           </svg>
                         </div>
                         <span className="text-sm font-medium text-gray-800">
-                          +88 010 513 51
+                          042-3682-7666
                         </span>
                       </div>
                     </div>
