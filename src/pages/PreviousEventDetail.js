@@ -183,7 +183,7 @@ const PreviousEventDetail = () => {
               </h1>
 
               {/* Event Status */}
-              <div className="mb-6">
+              <div className="mb-6 ">
                 <span className="inline-block bg-gray-500 text-white px-4 py-2 rounded-full text-sm font-medium">
                   PREVIOUS EVENT
                 </span>
@@ -194,7 +194,7 @@ const PreviousEventDetail = () => {
                 <img
                   src="/Bayyan.png"
                   alt="NAQSH-E-GOONJ - Bayaan Performance"
-                  className="w-full h-[1000px] object-cover rounded-lg shadow-lg"
+                  className=" h-[700px] object-contain rounded-lg shadow-lg"
                 />
               </div>
 

@@ -1,7 +1,5 @@
-import React from "react";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import eventBg from "../assets/eventbg.png";
-import eventImage from "../assets/event.jpg";
 
 const Events = () => {
   const navigate = useNavigate();
@@ -17,7 +15,6 @@ const Events = () => {
         }}
       >
         {/* Breadcrumb */}
-       
 
         {/* Hero Content */}
         <div className="text-center text-white z-10 mt-8">
@@ -45,7 +42,7 @@ const Events = () => {
                 </h3>
                 <ul className="space-y-4">
                   {[
-                    { id: "NAQSH-E-GOONJ", name: "NAQSH-E-GOONJ 2.0" },
+                    { id: "NAQSH-E-GOONJ", name: "GOONJ 2.0" },
                     // { id: "14-august", name: "14 August" },
                     // { id: "6-september", name: "6 September" },
                     // { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
@@ -161,9 +158,9 @@ const Events = () => {
                     </li>
                   ))}
                 </ul>
-                <button className="mt-6 w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition-colors shadow-md">
+                {/* <button className="mt-6 w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition-colors shadow-md">
                   VIEW ALL EVENTS
-                </button>
+                </button> */}
               </div>
             </div>
 
@@ -262,8 +259,8 @@ const Events = () => {
           </div>
 
           {/* Right Content - Event Cards */}
+          {/* 
           <div className="md:col-span-2 space-y-6">
-            {/* Featured Event */}
             <div className="relative rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
               <div className="absolute top-4 left-4 bg-green-500 text-white text-xs px-2 py-1 rounded">
                 LIVE
@@ -282,7 +279,6 @@ const Events = () => {
               </div>
             </div>
 
-            {/* Event Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {[
                 {
@@ -323,12 +319,21 @@ const Events = () => {
               ))}
             </div>
 
-            {/* Load More Button */}
             <div className="text-center">
               <button className="bg-[#4a0404] text-white px-8 py-2 rounded-md hover:bg-opacity-90 transition-colors">
                 Load More
               </button>
             </div>
+          </div>
+          */}
+
+          {/* Goonj Image */}
+          <div className="md:col-span-2">
+            <img
+              src="/goonjimage1.png"
+              alt="GOONJ 2.0 Event"
+              className=" h-[700px] object-contain"
+            />
           </div>
         </div>
       </div>

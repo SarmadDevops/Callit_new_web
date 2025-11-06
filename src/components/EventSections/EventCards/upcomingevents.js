@@ -15,7 +15,7 @@ const UpcomingEvents = () => {
         </h3>
         <ul className="space-y-4">
           {[
-            { id: "NAQSH-E-GOONJ", name: "NAQSH-E-GOONJ 2.0" },
+            { id: "NAQSH-E-GOONJ", name: "GOONJ 2.0" },
             // { id: "14-august", name: "14 August" },
             // { id: "6-september", name: "6 September" },
             // { id: "eid-milad", name: "Eid Milad-Un-Nabi" },
@@ -116,9 +116,9 @@ const UpcomingEvents = () => {
             </li>
           ))}
         </ul>
-        <button className="mt-6 w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition-colors shadow-md">
+        {/* <button className="mt-6 w-full bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600 transition-colors shadow-md">
           VIEW ALL EVENTS
-        </button>
+        </button> */}
       </div>
     </div>
   );

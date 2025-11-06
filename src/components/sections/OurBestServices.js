@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-scroll";
 import social from "../../assets/social.png";
 import DVC from "../../assets/DVC.png";
 import product from "../../assets/product.png";
@@ -158,15 +159,11 @@ const OurBestServices = () => {
               same we form, by you had human solution.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-              <button className="w-full sm:w-auto bg-[#4a0404] text-white px-8 py-3 text-base font-medium rounded-md flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all duration-300">
-                LEARN MORE <span className="text-xl">→</span>
-              </button>
-              <button className="w-full sm:w-auto bg-transparent border-2 border-[#4a0404] text-white px-8 py-3 text-base font-medium rounded-md flex items-center justify-center gap-3 hover:bg-[#4a0404] transition-all duration-300">
-                <span className="w-6 h-6 flex items-center justify-center border-2 border-[#4a0404] rounded-full text-sm">
-                  ▶
-                </span>
-                WATCH VIDEO
-              </button>
+              <Link to="about" smooth={true} duration={800} offset={-70}>
+                <button className="w-full sm:w-auto bg-[#4a0404] text-white px-8 py-3 text-base font-medium rounded-md flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all duration-300">
+                  LEARN MORE <span className="text-xl">→</span>
+                </button>
+              </Link>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-8">
               <div className="flex items-center gap-3">

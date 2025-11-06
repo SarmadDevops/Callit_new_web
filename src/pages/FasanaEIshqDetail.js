@@ -149,9 +149,9 @@ const FasanaEIshqDetail = () => {
             </div>
           </div>
 
-          {/* Middle Column - Event Image Only */}
+          {/* Middle Column - Event Content */}
           <div className="lg:col-span-6">
-            <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="bg-white rounded-lg p-6">
               {/* Event Status Badge */}
               <div className="mb-6">
                 <span className="inline-block bg-gray-500 text-white px-4 py-2 rounded-full text-sm font-medium">
@@ -159,19 +159,149 @@ const FasanaEIshqDetail = () => {
                 </span>
               </div>
 
+              {/* Event Title */}
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                FASANA-E-ISHQ
+              </h1>
+
               {/* Event Image */}
               <div className="mb-8">
                 <img
                   src="/zainbanner.png"
                   alt="FASANA-E-ISHQ Event"
-                  className="w-full h-auto object-contain rounded-lg shadow-lg"
+                  className=" h-[700px] object-contain rounded-lg shadow-lg"
                 />
+              </div>
+
+              {/* Event Description */}
+              <div className="mb-8">
+                <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                  Fasana e Ishq is an exclusive musical night featuring "Zain
+                  Zohaib" organized by Call IT Studio. Zain Zohaib is a gifted
+                  Qawwal whose music carries the soul of tradition with a fresh,
+                  heartfelt touch. Join us for a night of soulful music and an
+                  experience that leaves you lighter, more grounded, and quietly
+                  moved.
+                </p>
+              </div>
+
+              {/* Event Highlights */}
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  Event Highlights
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Featured Artists
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      Zain Zohaib and other renowned performers
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Event Type
+                    </h4>
+                    <p className="text-gray-700 text-sm">Qawali Night</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Organizer
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      Humanity Alliance Organization
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Management
+                    </h4>
+                    <p className="text-gray-700 text-sm">Call It Studio</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tags Section */}
+              <div className="border-t border-gray-200 pt-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <img
+                      src="/Vector.png"
+                      alt="Event Logo"
+                      className="w-5 h-5"
+                    />
+                    <div>
+                      <span className="font-semibold text-gray-900">Tags:</span>
+                      <p className="text-gray-700 text-sm">
+                        Previous Event | Fasana-e-Ishq | Brought To You By
+                        Humanity Alliance Organization | Managed By Call It
+                        Studio | Qawali Night | Live Performance
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <img
+                      src="/Vector.png"
+                      alt="Event Logo"
+                      className="w-5 h-5"
+                    />
+                    <div>
+                      <span className="font-semibold text-gray-900">
+                        Categories:
+                      </span>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Previous Event
+                        </span>
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Qawali Night
+                        </span>
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Live Performance
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column - Empty */}
-          <div className="lg:col-span-3">{/* Intentionally left empty */}</div>
+          {/* Right Column - Event Info */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Event Status Card */}
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
+              <div className="bg-gray-500 text-white text-center py-3 px-4">
+                <span className="font-semibold text-sm">PREVIOUS EVENT</span>
+              </div>
+
+              {/* Event Details */}
+              <div className="p-4 space-y-3">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Event Date:</span>
+                  <span className="text-gray-900">Completed</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Status:</span>
+                  <span className="text-gray-900">Successfully Held</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Artists:</span>
+                  <span className="text-gray-900">Featured Performers</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Venue:</span>
+                  <span className="text-gray-900">Expo Center, Lahore</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Organizer:</span>
+                  <span className="text-gray-900">Humanity Alliance Org</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

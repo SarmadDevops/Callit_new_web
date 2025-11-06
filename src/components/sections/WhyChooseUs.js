@@ -4,9 +4,11 @@ import React, { useState } from "react";
 // import detailed from "../../assets/detailed.png";
 // import selection from "../../assets/selection.png";
 import dumimg from "../../assets/dumimg.png";
+import ContactPopup from "../ContactPopup";
 
 const WhyChooseUs = () => {
   const [openQuestion, setOpenQuestion] = useState(null);
+  const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
   // const steps = [
   //   {
   //     title: "Initial Consultation and Assessment",
@@ -84,7 +86,11 @@ const WhyChooseUs = () => {
                       className="w-full py-3 px-4 text-base border border-gray-200 focus:outline-none focus:border-[#4a0404] placeholder-gray-400 resize-none rounded-md"
                     ></textarea>
                   </div>
-                  <button className="w-full sm:w-auto bg-[#4a0404] text-white px-8 py-3 text-base font-medium hover:bg-opacity-90 transition-all duration-300 rounded-md">
+                  <button
+                    onClick={() => setIsContactPopupOpen(true)}
+                    type="button"
+                    className="w-full sm:w-auto bg-[#4a0404] text-white px-8 py-3 text-base font-medium hover:bg-opacity-90 transition-all duration-300 rounded-md"
+                  >
                     SEND NOW →
                   </button>
                 </form>
@@ -249,18 +255,18 @@ const WhyChooseUs = () => {
       {/* Contact Info Bar */}
       <section className="py-8 sm:py-12 bg-white">
         <div className="w-full max-w-[1350px] mx-auto px-6 lg:px-12">
-          <div className="bg-[#4a0404] rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 relative overflow-hidden ">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 max-w-5xl mx-auto relative z-10">
-              <div className="text-white lg:w-[45%]">
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-2 sm:mb-3">
+          <div className="bg-[#4a0404] rounded-xl sm:rounded-2xl p-6 sm:p-8 lg:p-10 relative overflow-hidden">
+            <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 max-w-6xl mx-auto relative z-10">
+              <div className="text-white text-center lg:text-left lg:w-[35%]">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 sm:mb-3">
                   We help you with any questions or information you need
                 </h3>
-                <p className="text-gray-200 text-base sm:text-lg">
+                <p className="text-gray-200 text-sm sm:text-base">
                   What do you need assistance with?
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 lg:gap-8 lg:w-[55%]">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8 w-full">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 lg:gap-8 lg:w-[65%]">
+                <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 w-full justify-center">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
                       <svg
@@ -279,12 +285,12 @@ const WhyChooseUs = () => {
                         />
                       </svg>
                     </div>
-                    <div>
+                    <div className="text-center sm:text-left">
                       <p className="text-sm sm:text-base text-gray-200">
                         Get Contact Now
                       </p>
                       <p className="text-base sm:text-lg font-medium">
-                        +11234 751 328
+                        042-3682-7666
                       </p>
                     </div>
                   </div>
@@ -314,12 +320,12 @@ const WhyChooseUs = () => {
                         />
                       </svg>
                     </div>
-                    <div>
+                    <div className="text-center sm:text-left">
                       <p className="text-sm sm:text-base text-gray-200">
                         Send Email
                       </p>
                       <p className="text-base sm:text-lg font-medium">
-                        tolak@envato.com
+                        contact@callit-studio.com
                       </p>
                     </div>
                   </div>
@@ -327,7 +333,7 @@ const WhyChooseUs = () => {
                 <img
                   src={dumimg}
                   alt="Contact Support"
-                  className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-xl hidden lg:block"
+                  className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-xl hidden lg:block mx-auto lg:mx-0"
                 />
               </div>
             </div>
@@ -335,6 +341,12 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </section>
+
+      {/* Contact Popup */}
+      <ContactPopup
+        isOpen={isContactPopupOpen}
+        onClose={() => setIsContactPopupOpen(false)}
+      />
     </>
   );
 };

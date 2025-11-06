@@ -11,6 +11,8 @@ import Events from "./pages/Events";
 import EventDetail from "./pages/EventDetail";
 import PreviousEventDetail from "./pages/PreviousEventDetail";
 import FasanaEIshqDetail from "./pages/FasanaEIshqDetail";
+import PrivacyPolicy from "./pages/Privacypolicy";
+import TermsAndConditions from "./pages/Termsandconditions";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
             element={<PreviousEventDetail />}
           />
           <Route path="/fasana-e-ishq" element={<FasanaEIshqDetail />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsAndConditions />} />
         </Routes>
         <Footer />
       </div>
