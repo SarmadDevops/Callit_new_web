@@ -1,11 +1,11 @@
 import React from 'react';
-import { Check} from 'lucide-react';
+import { Check } from 'lucide-react';
 
 export default function About() {
   return (
     <section className="bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left Content */}
           <div>
             <div className="flex items-center gap-2 mb-4">
@@ -27,7 +27,7 @@ export default function About() {
             <div className="flex gap-4 mb-6 bg-white p-4 rounded-lg shadow-md">
               <div className="flex-shrink-0">
                 <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center">
-                 <img src="/missionicon.png" alt="mission Icon" className="w-6 h-6 text-gray-800" />
+                  <img src="/missionicon.png" alt="mission Icon" className="w-6 h-6" />
                 </div>
               </div>
               <div>
@@ -42,7 +42,7 @@ export default function About() {
             <div className="flex gap-4 mb-8 bg-white p-4 rounded-lg shadow-md">
               <div className="flex-shrink-0">
                 <div className="w-12 h-12 bg-gray-50 rounded-lg flex items-center justify-center">
-                 <img src="/historyicon.png" alt="history Icon" className="w-6 h-6 text-gray-800" />
+                  <img src="/historyicon.png" alt="history Icon" className="w-6 h-6" />
                 </div>
               </div>
               <div>
@@ -73,23 +73,23 @@ export default function About() {
           </div>
 
           {/* Right Content - Images */}
-          <div className="relative">
-            <div className="grid grid-cols-2 gap-4">
-              {/* Working Image */}
-              <div className="col-span-1 mt-12">
+          <div className="relative h-full">
+            <div className="grid grid-cols-2 gap-4 h-full">
+              {/* Working Image - Left side, starts lower */}
+              <div className="col-span-1">
                 <img
                   src="Aboutusimage1.jpg"
                   alt="Team collaboration"
-                  className="w-full h-96 object-cover rounded-lg shadow-lg"
+                  className="w-full h-96 lg:h-[600px] object-cover rounded-lg shadow-lg lg:mt-16"
                 />
               </div>
               
-              {/* Team Member Image with Badge */}
+              {/* Team Member Image with Badge - Right side, full height */}
               <div className="col-span-1 relative">
                 <img
                   src="Aboutusimage2.jpg"
                   alt="Team member"
-                  className="w-full h-96 object-cover rounded-lg shadow-lg"
+                  className="w-full h-96 lg:h-[600px] object-cover rounded-lg shadow-lg"
                 />
                 
                 {/* Experience Badge */}
