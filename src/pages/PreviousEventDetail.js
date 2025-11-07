@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import eventBg from "../assets/eventbg.png";
 import UpcomingEvents from "../components/EventSections/EventCards/upcomingevents";
 
@@ -31,22 +31,8 @@ const PreviousEventDetail = () => {
           backgroundPosition: "center",
         }}
       >
-        {/* Breadcrumb */}
-        <div className="absolute top-1/3 left-0 right-0">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 text-white/80 text-sm mb-4">
-              <Link to="/" className="hover:text-white">
-                Home
-              </Link>
-              <span>/</span>
-              <Link to="/events" className="hover:text-white">
-                Events
-              </Link>
-              <span>/</span>
-              <span>PREVIOUS EVENTS</span>
-            </div>
-          </div>
-        </div>
+        
+       
 
         {/* Hero Content */}
         <div className="text-center text-white z-10 mt-8">
@@ -67,7 +53,150 @@ const PreviousEventDetail = () => {
           <div className="lg:col-span-3">
             <div className="space-y-6">
               <UpcomingEvents />
+              
+          <div className="md:hidden">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              {/* Back to Events Link */}
+              <div className="mb-6">
+                <button
+                  onClick={() => navigate("/events")}
+                  className="flex items-center gap-2 text-gray-600 hover:text-[#4a0404] transition-colors"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                  Back to Events
+                </button>
+              </div>
 
+              {/* Event Title */}
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                NAQSH-E-GOONJ
+              </h1>
+
+              {/* Event Status */}
+              <div className="mb-6 ">
+                <span className="inline-block bg-gray-500 text-white px-4 py-2 rounded-full text-sm font-medium">
+                  PREVIOUS EVENT
+                </span>
+              </div>
+
+              {/* Event Image */}
+              <div className=" flex justify-center mb-8">
+                <img
+                  src="/Bayyan.png"
+                  alt="NAQSH-E-GOONJ - Bayaan Performance"
+                  className=" h-[500px] object-contain rounded-lg shadow-lg md:hidden"
+                />
+              </div>
+
+              {/* Event Description */}
+              <div className="mb-8">
+                <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                  Naqsh-e-Goonj was an exclusive musical night organized by the
+                  Humanity Alliance Organization, serving as a memorable event
+                  that featured a spectacular live performance by the renowned
+                  band Bayaan. This soulful concert delivered an evening of
+                  powerful music, meaningful connection, and artistic
+                  expression. More than just a concert, Naqsh-e-Goonj was a
+                  heartfelt embodiment of what music represents: art, emotion,
+                  and unity through creativity.
+                </p>
+              </div>
+
+              {/* Event Highlights */}
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  Event Highlights
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Featured Artist
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      Bayaan - Renowned Musical Band
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Event Type
+                    </h4>
+                    <p className="text-gray-700 text-sm">Live Music Concert</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Organizer
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      Humanity Alliance Organization
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Management
+                    </h4>
+                    <p className="text-gray-700 text-sm">Call It Studio</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tags Section */}
+              <div className="border-t border-gray-200 pt-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <img
+                      src="/Vector.png"
+                      alt="Event Logo"
+                      className="w-5 h-5"
+                    />
+                    <div>
+                      <span className="font-semibold text-gray-900">Tags:</span>
+                      <p className="text-gray-700 text-sm">
+                        Previous Event | Featuring Bayaan | Brought To You By
+                        Humanity Alliance Organization | Managed By Call It
+                        Studio | Musical Night | Live Performance
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <img
+                      src="/Vector.png"
+                      alt="Event Logo"
+                      className="w-5 h-5"
+                    />
+                    <div>
+                      <span className="font-semibold text-gray-900">
+                        Categories:
+                      </span>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Previous Event
+                        </span>
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Music Concert
+                        </span>
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Live Performance
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
               {/* Testimonial Card */}
               <div className="bg-[#4a0404] rounded-lg p-6 text-white">
                 <div className="flex items-start mb-4">
@@ -165,7 +294,7 @@ const PreviousEventDetail = () => {
           </div>
 
           {/* Main Content - NAQSH-E-GOONJ Details */}
-          <div className="lg:col-span-6">
+          <div className="hidden md:flex md:col-span-6">
             <div className="bg-white rounded-lg shadow-md p-6">
               {/* Back to Events Link */}
               <div className="mb-6">
@@ -207,7 +336,7 @@ const PreviousEventDetail = () => {
                 <img
                   src="/Bayyan.png"
                   alt="NAQSH-E-GOONJ - Bayaan Performance"
-                  className=" h-[700px] object-contain rounded-lg shadow-lg"
+                  className="hidden md:flex md:h-[700px] object-contain rounded-lg shadow-lg"
                 />
               </div>
 

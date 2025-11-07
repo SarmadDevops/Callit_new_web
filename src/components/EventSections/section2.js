@@ -41,7 +41,7 @@ const EventSection2 = () => {
           <img
             src="/goonjimage1.png"
             alt="NAQSH-E-GOONJ Event"
-            className=" h-[700px] object-contain rounded-lg shadow-lg"
+            className=" hidden md:flex md:h-[700px] object-contain rounded-lg shadow-lg"
           />
         </div>
       </div>

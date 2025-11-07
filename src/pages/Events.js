@@ -179,6 +179,14 @@ const Events = () => {
               </div>
             </div>
 
+            <div className=" flex justify-center  md:hidden">
+              <img
+                src="/goonjimage1.png"
+                alt="Event"
+                className=" h-[500px] object-contain  "
+              />
+            </div>
+
             {/* Testimonial Card */}
             <div className="bg-[#4a0404] rounded-lg p-6 text-white">
               <div className="flex items-start mb-4">
@@ -342,11 +350,11 @@ const Events = () => {
           */}
 
           {/* Goonj Image */}
-          <div className="md:col-span-2">
+          <div className="hidden md:flex md:justify-start col-span-2">
             <img
               src="/goonjimage1.png"
               alt="GOONJ 2.0 Event"
-              className=" h-[700px] object-contain"
+              className=" md:h-[700px] object-contain"
             />
           </div>
         </div>

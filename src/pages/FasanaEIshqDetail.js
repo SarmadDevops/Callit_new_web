@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import eventBg from "../assets/eventbg.png";
 import UpcomingEvents from "../components/EventSections/EventCards/upcomingevents";
 
@@ -21,22 +21,7 @@ const FasanaEIshqDetail = () => {
           backgroundPosition: "center",
         }}
       >
-        {/* Breadcrumb */}
-        <div className="absolute top-1/3 left-0 right-0">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-center gap-2 text-white/80 text-sm mb-4">
-              <Link to="/" className="hover:text-white">
-                Home
-              </Link>
-              <span>/</span>
-              <Link to="/events" className="hover:text-white">
-                Events
-              </Link>
-              <span>/</span>
-              <span>PREVIOUS EVENTS</span>
-            </div>
-          </div>
-        </div>
+      
 
         {/* Hero Content */}
         <div className="text-center text-white z-10 mt-8">
@@ -55,6 +40,126 @@ const FasanaEIshqDetail = () => {
           <div className="lg:col-span-3">
             <div className="space-y-6">
               <UpcomingEvents />
+
+               {/* Middle Column - Event Content */}
+          <div className="md:hidden">
+            <div className="bg-white rounded-lg p-6">
+              {/* Event Status Badge */}
+              <div className="mb-6">
+                <span className="inline-block bg-gray-500 text-white px-4 py-2 rounded-full text-sm font-medium">
+                  PREVIOUS EVENT
+                </span>
+              </div>
+
+              {/* Event Title */}
+              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                FASANA-E-ISHQ
+              </h1>
+
+              {/* Event Image */}
+              <div className="flex justify-centermb-8">
+                <img
+                  src="/zainbanner.png"
+                  alt="FASANA-E-ISHQ Event"
+                  className=" h-[500px] object-contain rounded-lg shadow-lg"
+                />
+              </div>
+
+              {/* Event Description */}
+              <div className="mb-8">
+                <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                  Fasana e Ishq is an exclusive musical night featuring "Zain
+                  Zohaib" organized by Call IT Studio. Zain Zohaib is a gifted
+                  Qawwal whose music carries the soul of tradition with a fresh,
+                  heartfelt touch. Join us for a night of soulful music and an
+                  experience that leaves you lighter, more grounded, and quietly
+                  moved.
+                </p>
+              </div>
+
+              {/* Event Highlights */}
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  Event Highlights
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Featured Artists
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      Zain Zohaib and other renowned performers
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Event Type
+                    </h4>
+                    <p className="text-gray-700 text-sm">Qawali Night</p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Organizer
+                    </h4>
+                    <p className="text-gray-700 text-sm">
+                      Humanity Alliance Organization
+                    </p>
+                  </div>
+                  <div className="bg-gray-50 p-4 rounded-lg">
+                    <h4 className="font-semibold text-gray-900 mb-2">
+                      Management
+                    </h4>
+                    <p className="text-gray-700 text-sm">Call It Studio</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tags Section */}
+              <div className="border-t border-gray-200 pt-6">
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <img
+                      src="/Vector.png"
+                      alt="Event Logo"
+                      className="w-5 h-5"
+                    />
+                    <div>
+                      <span className="font-semibold text-gray-900">Tags:</span>
+                      <p className="text-gray-700 text-sm">
+                        Previous Event | Fasana-e-Ishq | Brought To You By
+                        Humanity Alliance Organization | Managed By Call It
+                        Studio | Qawali Night | Live Performance
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <img
+                      src="/Vector.png"
+                      alt="Event Logo"
+                      className="w-5 h-5"
+                    />
+                    <div>
+                      <span className="font-semibold text-gray-900">
+                        Categories:
+                      </span>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Previous Event
+                        </span>
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Qawali Night
+                        </span>
+                        <span className="text-gray-700 px-3 py-1 rounded-full text-sm bg-gray-100">
+                          Live Performance
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
               {/* Testimonial Card */}
               <div className="bg-[#4a0404] rounded-lg p-6 text-white">
@@ -153,7 +258,7 @@ const FasanaEIshqDetail = () => {
           </div>
 
           {/* Middle Column - Event Content */}
-          <div className="lg:col-span-6">
+          <div className="hidden md:flex md:col-span-6">
             <div className="bg-white rounded-lg p-6">
               {/* Event Status Badge */}
               <div className="mb-6">
@@ -172,7 +277,7 @@ const FasanaEIshqDetail = () => {
                 <img
                   src="/zainbanner.png"
                   alt="FASANA-E-ISHQ Event"
-                  className=" h-[700px] object-contain rounded-lg shadow-lg"
+                  className="hidden md:flex md:h-[700px] object-contain rounded-lg shadow-lg"
                 />
               </div>
 
