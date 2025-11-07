@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import bgImage from "../../assets/bg.png";
-import heroRight from "../../assets/hero-right.png";
+// import heroRight from "../../assets/hero-right.png";
 import ContactPopup from "../ContactPopup";
 import { Link } from "react-scroll";
 
@@ -9,7 +9,10 @@ const Hero = () => {
   const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-[60vh] sm:min-h-[70vh] lg:min-h-screen flex items-center lg:items-start"
+    >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <div
@@ -22,26 +25,26 @@ const Hero = () => {
       </div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 w-full max-w-[1800px] mx-auto h-[calc(100vh-80px)] overflow-hidden">
-        <div className="flex justify-center lg:justify-end items-start lg:items-end h-full pt-20 lg:pt-32 px-6 lg:px-12">
+      <div className="relative z-10 w-full max-w-[1350px] mx-auto h-full overflow-x-hidden">
+        <div className="flex justify-center lg:justify-end items-center lg:items-end min-h-[60vh] sm:min-h-[70vh] lg:h-[calc(100vh-80px)] pt-20 sm:pt-16 lg:pt-32 px-4 sm:px-6 lg:px-12">
           <div className="flex flex-col lg:flex-row items-center lg:items-end gap-6 lg:gap-8 w-full lg:w-auto lg:mr-20">
             {/* Left Content */}
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="flex-1 max-w-xl text-center md:text-left px-4 sm:px-0"
+              className="flex-1 max-w-xl text-center lg:text-left px-4 sm:px-0"
             >
-              <div className="mb-8 sm:mb-6">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+              <div className="mb-6 sm:mb-8 lg:mb-6">
+                <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
                   Complete Creative
                 </h1>
                 <div className="relative mt-1">
-                  <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-red-600">
+                  <span className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-red-600">
                     Solution
                   </span>
                 </div>
-                <p className="text-gray-300 text-base sm:text-lg mt-3">
+                <p className="text-gray-300 text-sm xs:text-base sm:text-lg mt-3">
                   — Under One Roof.
                 </p>
                 <p className="text-gray-400 mt-4 mb-8 text-sm sm:text-base max-w-md mx-auto md:mx-0 leading-relaxed">
@@ -50,7 +53,7 @@ const Hero = () => {
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
+              <div className="flex flex-col items-center justify-center sm:flex-row sm:ml-0  md:justify-start space-y-3 sm:space-y-0 sm:space-x-4">
                 <Link to="about" smooth={true} duration={800} offset={-70}>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -79,11 +82,11 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative mt-8 md:mt-0 md:ml-8 block md:block"
             >
-              <img
+              {/* <img
                 src={heroRight}
                 alt="Team Collaboration"
                 className="w-[100px] sm:w-[120px] lg:w-[160px] h-[150px] sm:h-[180px] lg:h-[250px] object-cover rounded-lg shadow-lg"
-              />
+              /> */}
             </motion.div>
           </div>
         </div>

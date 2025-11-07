@@ -17,7 +17,7 @@ import TermsAndConditions from "./pages/Termsandconditions";
 function App() {
   return (
     <Router>
-      <div className="bg-darkBg min-h-screen">
+      <div className="bg-darkBg min-h-screen overflow-x-hidden">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

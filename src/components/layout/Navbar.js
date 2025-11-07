@@ -61,13 +61,13 @@ const Navbar = () => {
     { name: "Home", to: "home", type: "scroll" },
     { name: "About Us", to: "about", type: "scroll" },
     { name: "Services", to: "services", type: "scroll" },
-   
+
     { name: "Events", to: "/events", type: "route" },
   ];
 
   return (
-    <div className="fixed w-full z-50 flex justify-center pt-1 sm:pt-2 md:pt-4">
-      <div className="relative w-[98%] sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-[1275px]">
+    <div className="fixed w-full z-50 flex justify-center pt-1 sm:pt-2 md:pt-4 px-2 sm:px-0">
+      <div className="relative w-full sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-[1275px]">
         <motion.nav
           initial={{ y: -100 }}
           animate={{ y: 0 }}
@@ -75,7 +75,7 @@ const Navbar = () => {
             scrolled ? "shadow-lg" : ""
           }`}
         >
-          <div className="px-2 sm:px-4 md:px-6 lg:px-8">
+          <div className="px-3 sm:px-4 md:px-6 lg:px-8">
             <div className="flex justify-between items-center h-12 sm:h-14 md:h-16">
               {/* Logo */}
               <div className="flex items-center">
@@ -135,7 +135,7 @@ const Navbar = () => {
                     </RouterLink>
                   )
                 )}
-                <button 
+                <button
                   className="bg-[#4a0404] text-white text-xs px-3 lg:px-4 py-1.5 lg:py-2 rounded hover:bg-opacity-90 transition-all duration-300 ml-2"
                   onClick={() => {
                     console.log("Contact button clicked - Desktop");
@@ -182,7 +182,7 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.2 }}
-              className="absolute top-full left-0 right-0 mt-1 sm:mt-2 bg-[#4a0404] bg-opacity-95 backdrop-blur-sm rounded-lg shadow-lg md:hidden overflow-hidden"
+              className="absolute top-full left-0 right-0 mt-1 sm:mt-2 bg-[#4a0404] bg-opacity-95 backdrop-blur-sm rounded-lg shadow-lg md:hidden overflow-hidden z-[60] mx-1 sm:mx-0"
             >
               <div className="py-3 px-4">
                 <div className="flex flex-col space-y-2.5">
@@ -239,7 +239,7 @@ const Navbar = () => {
                       </RouterLink>
                     )
                   )}
-                  <button 
+                  <button
                     className="bg-white text-[#4a0404] text-[13px] px-4 py-2 rounded w-full hover:bg-opacity-90 transition-all duration-300 font-medium"
                     onClick={() => {
                       console.log("Contact button clicked - Mobile");
@@ -258,7 +258,7 @@ const Navbar = () => {
 
       {/* Contact Popup */}
       {console.log("ContactPopup render check:", { isContactPopupOpen })}
-      <ContactPopup 
+      <ContactPopup
         isOpen={isContactPopupOpen}
         onClose={() => {
           console.log("ContactPopup close called");
