@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import bgImage from "../../assets/ab.png";
+import bgImage from "../../assets/bg.png";
 // import heroRight from "../../assets/hero-right.png";
 import ContactPopup from "../ContactPopup";
 import { Link } from "react-scroll";
