@@ -115,13 +115,13 @@ const Footer = () => {
               <li className="flex items-center gap-4 justify-center lg:justify-start">
                 <i className="fas fa-phone-alt text-lg text-gray-300"></i>
                 <span className="text-base sm:text-lg text-gray-300">
-                  042-3682-7666
+                  +92-321-3752520
                 </span>
               </li>
               <li className="flex items-center gap-4 justify-center lg:justify-start">
                 <i className="fas fa-envelope text-lg text-gray-300"></i>
                 <span className="text-base sm:text-lg text-gray-300">
-                  contact@callit-studio.com
+                  callitstudio@gmail.com
                 </span>
               </li>
             </ul>

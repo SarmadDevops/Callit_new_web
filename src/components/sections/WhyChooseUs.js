@@ -290,7 +290,7 @@ const WhyChooseUs = () => {
                         Get Contact Now
                       </p>
                       <p className="text-base sm:text-lg font-medium">
-                        042-3682-7666
+                        +92-321-3752520
                       </p>
                     </div>
                   </div>
@@ -325,7 +325,7 @@ const WhyChooseUs = () => {
                         Send Email
                       </p>
                       <p className="text-base sm:text-lg font-medium">
-                        contact@callit-studio.com
+                        callitstudio@gmail.com
                       </p>
                     </div>
                   </div>

@@ -48,7 +48,7 @@ const QueryCard = () => {
                   </svg>
                 </div>
                 <span className="text-sm font-medium text-gray-800">
-                  042-3682-7666
+                  +92-321-3752520
                 </span>
               </div>
             </div>
