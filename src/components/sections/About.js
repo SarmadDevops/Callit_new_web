@@ -104,7 +104,7 @@ export default function About() {
               {/* Working Image - Left side, starts lower */}
               <div className="col-span-1">
                 <img
-                  src="Aboutusimage1.jpg"
+                  src="dua1.png"
                   alt="Team collaboration"
                   className="w-full h-96 lg:h-[600px] object-cover rounded-lg shadow-lg lg:mt-16"
                 />
@@ -113,7 +113,7 @@ export default function About() {
               {/* Team Member Image with Badge - Right side, full height */}
               <div className="col-span-1 relative">
                 <img
-                  src="Aboutusimage2.jpg"
+                  src="dua2.png"
                   alt="Team member"
                   className="w-full h-96 lg:h-[600px] object-cover rounded-lg shadow-lg"
                 />
