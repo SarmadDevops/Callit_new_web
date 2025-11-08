@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+// Commented out routing imports - uncomment when needed
+// import { useNavigate } from "react-router-dom";
 import { services } from "../../data/services";
 
 const Services = () => {
-  const navigate = useNavigate();
+  // Commented out navigate hook - uncomment when needed
+  // const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(
     typeof window !== "undefined" ? window.innerWidth : 1024
@@ -123,14 +125,15 @@ const Services = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative mx-auto w-full max-w-[400px] transform hover:-translate-y-1 cursor-pointer"
-                    onClick={() =>
-                      navigate(
-                        `/service/${service.title
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")}`
-                      )
-                    }
+                    className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 relative mx-auto w-full max-w-[400px] transform hover:-translate-y-1"
+                    // Commented out routing - uncomment when needed
+                    // onClick={() =>
+                    //   navigate(
+                    //     `/service/${service.title
+                    //       .toLowerCase()
+                    //       .replace(/\s+/g, "-")}`
+                    //   )
+                    // }
                   >
                     {/* Service Image Container */}
                     <div className="relative">
