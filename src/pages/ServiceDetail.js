@@ -12,7 +12,8 @@ const ServiceDetail = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleLearnMoreClick = () => {
+  // Handle navigation to About Us section
+  const handleGetStartedClick = () => {
     navigate("/");
     setTimeout(() => {
       document.getElementById("about")?.scrollIntoView({
@@ -46,25 +47,25 @@ const ServiceDetail = () => {
           }}
         >
           <div className="absolute inset-0 bg-black/50"></div>
-          <h1 className="text-4xl font-bold text-white relative z-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-white relative z-10">
             {currentService.title.toUpperCase()}
           </h1>
         </div>
 
         {/* Content Section */}
-        <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
             {/* Service Menu */}
-            <div className="flex flex-col gap-6">
-              <div className="bg-white rounded-lg shadow-md p-6">
-                <h3 className="text-base border-b border-gray-200 pb-2 mb-4 text-[#4a0404] font-medium">
+            <div className="lg:col-span-1 flex flex-col gap-6">
+              <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
+                <h3 className="text-sm sm:text-base border-b border-gray-200 pb-2 mb-4 text-[#4a0404] font-medium">
                   Services List
                 </h3>
                 <ul className="space-y-2">
                   {services.map((service) => (
                     <li
                       key={service.id}
-                      className={`py-3 px-4 flex justify-between items-center cursor-pointer transition-all duration-300 ${
+                      className={`py-2 sm:py-3 px-3 sm:px-4 flex justify-between items-center cursor-pointer transition-all duration-300 text-sm sm:text-base ${
                         service.id === currentService.id
                           ? "bg-[#4a0404] text-white rounded"
                           : "text-gray-700 hover:bg-gray-50"
@@ -74,7 +75,7 @@ const ServiceDetail = () => {
                       {service.title}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className={`h-4 w-4 ${
+                        className={`h-3 w-3 sm:h-4 sm:w-4 ${
                           service.id === currentService.id
                             ? "text-white"
                             : "text-gray-400"
@@ -96,26 +97,26 @@ const ServiceDetail = () => {
               </div>
 
               {/* Testimonial Card */}
-              <div className="bg-[#4a0404] rounded-lg p-6 text-white">
+              <div className="bg-[#4a0404] rounded-lg p-4 sm:p-6 text-white">
                 <div className="flex items-start mb-4">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-white/80"
+                    className="h-6 w-6 sm:h-8 sm:w-8 text-white/80"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
                   </svg>
                 </div>
-                <p className="text-sm text-white/90 mb-6">
-                  Neque porro est qui dolorem ipsum quia quaed inventore
-                  veritatis et
+                <p className="text-xs sm:text-sm text-white/90 mb-4 sm:mb-6">
+                  Excellent design and project management , the team delivered
+                  exactly what we needed with great attention to detail.
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/20 flex items-center justify-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6"
+                      className="h-4 w-4 sm:h-6 sm:w-6"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -128,31 +129,37 @@ const ServiceDetail = () => {
                       />
                     </svg>
                   </div>
-                  <span className="font-medium">Alex Handson</span>
+                  <span className="text-sm sm:text-base font-medium">
+                    Alex Handson
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Main Content */}
-            <div className="md:col-span-2">
-              <div className="bg-white rounded-lg shadow-md p-8">
-                <div className="flex items-center gap-4 mb-8">
+            <div className="lg:col-span-3">
+              <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 lg:p-8">
+                {/* Main Service Image */}
+                <div className="mb-6 lg:mb-8">
                   <img
                     src={currentService.image}
                     alt={currentService.title}
-                    className="w-[90%] h-auto rounded-lg"
+                    className="w-full h-auto rounded-lg"
                   />
                 </div>
 
-                <h2 className="text-2xl font-bold mb-6 text-black">
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-black">
                   What We Offer
                 </h2>
-                <div className="flex justify-between items-start">
-                  <div className="w-[55%]">
-                    <ul className="space-y-4 max-w-md">
+
+                {/* Proper Content & Image Layout */}
+                <div className="flex flex-col sm:flex-row items-start gap-6">
+                  {/* Content Section */}
+                  <div className="w-full sm:w-[60%]">
+                    <ul className="space-y-4">
                       {currentService.offerings.map((offering, index) => (
                         <li key={index} className="flex items-start gap-3">
-                          <div className="min-w-[24px] h-6 flex items-center justify-center text-[#4a0404]">
+                          <div className="min-w-[20px] h-5 flex items-center justify-center text-[#4a0404] mt-1">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="h-5 w-5"
@@ -166,30 +173,37 @@ const ServiceDetail = () => {
                               />
                             </svg>
                           </div>
-                          <span className="text-gray-700">{offering}</span>
+                          <span className="text-base text-gray-700 leading-relaxed">
+                            {offering}
+                          </span>
                         </li>
                       ))}
                     </ul>
-                    <button className="mt-6 bg-[#4a0404] text-white px-6 py-2 rounded hover:bg-opacity-90 transition-all duration-300">
+                    <button
+                      onClick={handleGetStartedClick}
+                      className="mt-6 bg-[#4a0404] text-white px-8 py-3 text-base rounded-lg hover:bg-opacity-90 transition-all duration-300 font-semibold"
+                    >
                       GET STARTED
                     </button>
                   </div>
-                  <div className="flex-1 flex justify-center">
+
+                  {/* Image Section */}
+                  <div className="w-full sm:w-[35%] flex justify-center">
                     <img
                       src={currentService.offerImg}
                       alt="Service"
-                      className="w-[45%] h-auto rounded-lg object-cover mr-0"
+                      className="w-full max-w-[280px] sm:max-w-none h-[250px] object-cover rounded-lg shadow-lg"
                     />
                   </div>
                 </div>
 
                 {/* Success & Solutions and Quality Access sections */}
-                <div className="flex items-center justify-between mt-8 mb-4 w-[70%]">
-                  <div className="flex items-center gap-2">
-                    <div className="min-w-[24px] h-6 flex items-center justify-center text-[#4a0404]">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-start sm:justify-between mt-6 sm:mt-8 mb-4 gap-4 sm:gap-0 w-full lg:w-[70%]">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="min-w-[20px] sm:min-w-[24px] h-5 sm:h-6 flex items-center justify-center text-[#4a0404]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -200,15 +214,15 @@ const ServiceDetail = () => {
                         />
                       </svg>
                     </div>
-                    <span className="text-sm font-semibold text-black">
+                    <span className="text-xs sm:text-sm font-semibold text-black">
                       Success & Solutions
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="min-w-[24px] h-6 flex items-center justify-center text-[#4a0404]">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="min-w-[20px] sm:min-w-[24px] h-5 sm:h-6 flex items-center justify-center text-[#4a0404]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="h-4 w-4 sm:h-5 sm:w-5"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
@@ -219,137 +233,92 @@ const ServiceDetail = () => {
                         />
                       </svg>
                     </div>
-                    <span className="text-sm font-semibold text-black">
+                    <span className="text-xs sm:text-sm font-semibold text-black">
                       Quality Access to Optimize
                     </span>
-                  </div>
-                </div>
-
-                {/* Contact Section */}
-                <div className="bg-[#4a0404] rounded-xl mt-8 p-6 text-white w-[90%]">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h3 className="text-lg font-semibold w-[85%]">
-                        We help you with any questions
-                      </h3>
-                    </div>
-                    <div className="flex items-center gap-8 w-[75%] ml-5">
-                      <div className="flex items-center gap-3">
-                        <div className="rounded-full bg-white/10 p-2">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                            />
-                          </svg>
-                        </div>
-                        <div>
-                          <div className="text-smm opacity-90">
-                            Get Contact Now
-                          </div>
-                          <div className="font-semibold text-sm">
-                            +11234 751 328
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="rounded-full bg-white/10 p-2">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                            />
-                          </svg>
-                        </div>
-                        <div>
-                          <div className="text-sm opacity-90">Sent Email</div>
-                          <div className="font-semibold">callstudio.com</div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Dark Contact Section */}
-      <div className="bg-black w-full">
-        <div className="container mx-auto text-white py-16 text-center">
-          <p className="text-sm text-gray-400 mb-2">
-            LET'S TRY! GET FREE SUPPORT
-          </p>
-          <h2 className="text-2xl font-bold mb-3">
-            Get Our Any Service And Contact Now!
-          </h2>
-          <p className="text-sm text-gray-400 mb-8">
-            Business tailored design, management & support services Business
-            <br />
-            to save we form by injected finance solution.
-          </p>
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              onClick={handleLearnMoreClick}
-              className="bg-[#4a0404] text-white px-6 py-2 rounded-md flex items-center gap-2"
-            >
-              LEARN MORE
-              <span className="text-xl">→</span>
-            </button>
-            <button className="bg-white/10 text-white px-4 py-2 rounded-full flex items-center gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              WATCH VIDEO
-            </button>
-          </div>
-          <div className="flex justify-center items-center gap-8">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm">Business Solution</span>
+          <div className="bg-[#4a0404] rounded-lg sm:rounded-xl lg:rounded-2xl p-4 sm:p-6 lg:p-10 relative overflow-hidden mt-6 lg:mt-8">
+            <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-6 sm:gap-8 max-w-6xl mx-auto relative z-10">
+              <div className="text-white text-center lg:text-left w-full lg:w-[35%]">
+                <h3 className="text-base sm:text-lg lg:text-xl xl:text-2xl font-semibold mb-2 sm:mb-3">
+                  We help you with any questions or information you need
+                </h3>
+                <p className="text-gray-200 text-xs sm:text-sm lg:text-base">
+                  What do you need assistance with?
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 lg:gap-8 w-full lg:w-[65%]">
+                <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 lg:gap-8 w-full justify-center">
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center">
+                      <svg
+                        width="20"
+                        height="20"
+                        className="sm:w-6 sm:h-6"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <p className="text-xs sm:text-sm text-gray-200">
+                        Get Contact Now
+                      </p>
+                      <p className="text-sm sm:text-base lg:text-lg font-medium">
+                        +92-321-3752520
+                      </p>
+                    </div>
+                  </div>
+                  <div className="hidden sm:block h-8 sm:h-12 w-[1px] bg-white/20"></div>
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 flex items-center justify-center">
+                      <svg
+                        width="20"
+                        height="20"
+                        className="sm:w-6 sm:h-6"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M22 6l-10 7L2 6"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <div className="text-center sm:text-left">
+                      <p className="text-xs sm:text-sm text-gray-200">
+                        Send Email
+                      </p>
+                      <p className="text-sm sm:text-base lg:text-lg font-medium">
+                        callitstudio@gmail.com
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm">Team Support</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm">Free 24/7 Support</span>
-            </div>
+            <div className="absolute right-0 top-0 h-full w-1/4 sm:w-1/3 bg-white/5 rounded-l-full"></div>
           </div>
         </div>
       </div>

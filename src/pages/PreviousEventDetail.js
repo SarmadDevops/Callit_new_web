@@ -10,15 +10,7 @@ const PreviousEventDetail = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleLearnMoreClick = () => {
-    navigate("/");
-    setTimeout(() => {
-      document.getElementById("about")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }, 100);
-  };
+ 
 
   return (
     <div className="min-h-screen bg-white">
@@ -96,7 +88,7 @@ const PreviousEventDetail = () => {
                 <img
                   src="/Bayyan.png"
                   alt="NAQSH-E-GOONJ - Bayaan Performance"
-                  className=" h-[500px] object-contain rounded-lg shadow-lg md:hidden"
+                  className=" h-[500px] object-contain rounded-lg  md:hidden"
                 />
               </div>
 
@@ -336,7 +328,7 @@ const PreviousEventDetail = () => {
                 <img
                   src="/Bayyan.png"
                   alt="NAQSH-E-GOONJ - Bayaan Performance"
-                  className="hidden md:flex md:h-[700px] object-contain rounded-lg shadow-lg"
+                  className="hidden md:flex md:h-[700px] object-contain rounded-lg "
                 />
               </div>
 
@@ -474,45 +466,7 @@ const PreviousEventDetail = () => {
         </div>
       </div>
 
-      {/* Dark Contact Section */}
-      <div className="bg-black w-full">
-        <div className="container mx-auto text-white py-16 text-center">
-          <p className="text-sm text-gray-400 mb-2">
-            LET'S TRY! GET FREE SUPPORT
-          </p>
-          <h2 className="text-2xl font-bold mb-3">
-            Get Our Any Service And Contact Now!
-          </h2>
-          <p className="text-sm text-gray-400 mb-8">
-            Business tailored design, management & support services Business
-            <br />
-            to save we form by injected finance solution.
-          </p>
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              onClick={handleLearnMoreClick}
-              className="bg-[#4a0404] text-white px-6 py-2 rounded-md flex items-center gap-2"
-            >
-              LEARN MORE
-              <span className="text-xl">→</span>
-            </button>
-          </div>
-          <div className="flex justify-center items-center gap-8">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm">Business Solution</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm">Team Support</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-white rounded-full"></div>
-              <span className="text-sm">Free 24/7 Support</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    
     </div>
   );
 };

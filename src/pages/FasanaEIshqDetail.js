@@ -61,7 +61,7 @@ const FasanaEIshqDetail = () => {
                 <img
                   src="/zainbanner.png"
                   alt="FASANA-E-ISHQ Event"
-                  className=" h-[500px] object-contain rounded-lg shadow-lg"
+                  className=" h-[500px] object-contain rounded-lg "
                 />
               </div>
 
@@ -277,7 +277,7 @@ const FasanaEIshqDetail = () => {
                 <img
                   src="/zainbanner.png"
                   alt="FASANA-E-ISHQ Event"
-                  className="hidden md:flex md:h-[700px] object-contain rounded-lg shadow-lg"
+                  className="hidden md:flex md:h-[700px] object-contain rounded-lg "
                 />
               </div>
 
