@@ -1,15 +1,21 @@
-//import { useNavigate } from "react-router-dom";
+// import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import EventInfo from "./EventCards/eventinfo";
 // import BookingTicketsCard from "./EventCards/bookingticketscard,";
+// import ContactInfo from "./EventCards/contactinfo";
 
 const EventSection2 = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
+  // const [showTicketsInfo, setShowTicketsInfo] = useState(false);
+
+  // const handleDayCardClick = (dayNumber) => {
+  //   setShowTicketsInfo(dayNumber !== null);
+  // };
   return (
     <>
       {/* Main Event Content - Single column */}
       <div className="lg:col-span-6">
-        {/*
-         <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-lg  p-6">
           <div className="mb-6">
             <button
               onClick={() => navigate("/events")}
@@ -31,10 +37,10 @@ const EventSection2 = () => {
               Back to Events
             </button>
           </div>
-          <EventInfo />
-          <BookingTicketsCard />
+          {/* <BookingTicketsCard onDayCardClick={handleDayCardClick} />
+          {showTicketsInfo && <EventInfo />}
+          <ContactInfo /> */}
         </div>
-        */}
 
         {/* Event Image - Added from line 36 */}
         <div className="mb-8">
