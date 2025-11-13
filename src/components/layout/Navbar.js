@@ -65,6 +65,11 @@ const Navbar = () => {
     { name: "Events", to: "/events", type: "route" },
   ];
 
+  // Hide Navbar on Events Detail pages only (e.g., /events/:id)
+  if (location.pathname.startsWith("/events")) {
+    return null;
+  }
+
   return (
     <div className="fixed w-full z-50 flex justify-center pt-1 sm:pt-2 md:pt-4 px-2 sm:px-0">
       <div className="relative w-full sm:w-[95%] md:w-[90%] lg:w-[90%] max-w-[1275px]">

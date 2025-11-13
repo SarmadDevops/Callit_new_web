@@ -45,20 +45,20 @@ const Organizers = () => {
                 <span className="text-gray-700 ml-2">Goonj</span>
               </div>
 
-              <div className="flex items-start text-sm">
+              {/* <div className="flex items-start text-sm">
                 <span className="font-semibold text-gray-800 w-16 flex-shrink-0">
                   Email:
                 </span>
-                <span className="text-gray-700 ml-2 text-xs whitespace-nowrap overflow-hidden">
+                <span className="text-gray-700  text-xs whitespace-nowrap overflow-hidden">
                   contact@callit-studio.com
                 </span>
-              </div>
+              </div> */}
 
               <div className="flex items-start text-sm">
                 <span className="font-semibold text-gray-800 w-16 flex-shrink-0">
                   Phone:
                 </span>
-                <span className="text-gray-700 ml-2">042-3682-7666</span>
+                <span className="text-gray-700 ml-2">+92-321-3752520</span>
               </div>
 
               {/* <div className="flex text-sm">

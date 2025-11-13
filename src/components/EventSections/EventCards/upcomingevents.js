@@ -25,14 +25,14 @@ const UpcomingEvents = () => {
               key={event.id}
               onClick={() => {
                 if (event.id === "NAQSH-E-GOONJ") {
-                  navigate(`/events/${event.id}`);
+                  navigate(`/events`);
                 }
                 // Other events don't navigate anywhere
               }}
               className={`flex justify-between items-center ${
                 event.id === "NAQSH-E-GOONJ" ? "cursor-pointer" : ""
               } rounded px-3 py-2 transition-colors ${
-                window.location.pathname === `/events/${event.id}`
+                window.location.pathname === `/events`
                   ? "bg-[#4a0404] text-white shadow-md"
                   : event.id === "NAQSH-E-GOONJ"
                   ? "hover:bg-gray-50 text-gray-800"
