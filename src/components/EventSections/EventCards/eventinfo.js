@@ -6,6 +6,7 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
       DAY1: { VIP: 2500, GOLD: 1500, STANDARD: 1000 },
       DAY2: { VIP: 5000, GOLD: 3500, STANDARD: 2500 },
       DAY3: { VIP: 3000, GOLD: 2000, STANDARD: 1500 },
+      ALL_DAYS: { Singlepass: 4000  },
     }),
     []
   );
@@ -44,7 +45,48 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
         </div>
 
         {/* Ticket Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div className={`grid gap-4 mb-6 ${
+          selectedDay === "ALL_DAYS" 
+            ? "grid-cols-1 place-items-center" 
+            : "grid-cols-1 sm:grid-cols-3"
+        }`}>
+          
+          {selectedDay === "ALL_DAYS" ? (
+            /* Single Pass Ticket for All Days */
+            <button
+              className={`${
+                selectedTicket?.type === "Singlepass"
+                  ? "bg-[#4a0404] text-white hover:bg-[#4a0404]"
+                  : "bg-[#949494] text-white hover:bg-[#4a0404]"
+              } relative rounded-lg p-4 text-center transition-colors h-56 md:h-60 flex flex-col items-center w-80`}
+              onClick={() => handleTicketSelect("Singlepass")}
+            >
+              <div className="flex-1 flex flex-col items-center justify-center space-y-2">
+                <h3 className="font-extrabold text-base md:text-lg tracking-wide">
+                  SINGLE PASS
+                </h3>
+                <p className="text-xs md:text-sm opacity-90">AVAILABLE</p>
+                <div className="text-xs md:text-sm opacity-90 space-y-1 text-center">
+                  <p className="whitespace-nowrap">• ALL 3 DAYS ACCESS</p>
+                  <p className="whitespace-nowrap">• BEST VALUE PACKAGE</p>
+                </div>
+              </div>
+              <p className="mt-2 md:mt-3 font-bold text-sm md:text-base">
+                PKR {Number(priceTable[selectedDay]?.Singlepass || 0).toLocaleString()}
+              </p>
+
+              <span
+                aria-hidden="true"
+                className={`pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent ${
+                  selectedTicket?.type === "Singlepass"
+                    ? "border-t-[#4a0404]"
+                    : "border-t-[#949494]"
+                }`}
+              />
+            </button>
+          ) : (
+            /* Regular VIP, GOLD, STANDARD tickets for individual days */
+            <>
           {/* VIP Ticket */}
           <button
             className={`${
@@ -203,6 +245,8 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
               }`}
             />
           </button>
+          </>
+          )}
         </div>
 
         {/* Ticket Selection Dropdown */}

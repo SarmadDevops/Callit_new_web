@@ -77,23 +77,20 @@ We can’t wait to see you there!`}
 
         {activeTab === "DAY" && (
           <div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+            {/* Small Screen: All cards in single column */}
+            <div className="sm:hidden grid grid-cols-1 gap-3 mb-4">
               <button
-                className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors h-48 md:h-42 flex flex-col items-center"
+                className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors h-48 flex flex-col items-center"
                 onClick={() => handleDaySelect("DAY1")}
               >
                 <div className="flex-1 flex flex-col items-center justify-center space-y-2">
-                  <div className="font-extrabold text-base md:text-lg tracking-wide">
+                  <div className="font-extrabold text-base tracking-wide">
                     DAY 01
                   </div>
-                  <div className="text-xs md:text-sm opacity-90">
-                    Starting Price
-                  </div>
-                  <div className="font-bold text-sm md:text-base">
-                    PKR 1,000
-                  </div>
+                  <div className="text-xs opacity-90">Starting Price</div>
+                  <div className="font-bold text-sm">PKR 1,000</div>
                 </div>
-                <div className="mt-2 md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
+                <div className="mt-2 text-[10px] uppercase tracking-wider opacity-90">
                   See Plans
                 </div>
                 <span
@@ -103,21 +100,17 @@ We can’t wait to see you there!`}
               </button>
 
               <button
-                className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors h-48 md:h-42 flex flex-col items-center"
+                className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors h-48 flex flex-col items-center"
                 onClick={() => handleDaySelect("DAY2")}
               >
                 <div className="flex-1 flex flex-col items-center justify-center space-y-2">
-                  <div className="font-extrabold text-base md:text-lg tracking-wide">
+                  <div className="font-extrabold text-base tracking-wide">
                     DAY 02
                   </div>
-                  <div className="text-xs md:text-sm opacity-90">
-                    Starting Price
-                  </div>
-                  <div className="font-bold text-sm md:text-base">
-                    PKR 2,000
-                  </div>
+                  <div className="text-xs opacity-90">Starting Price</div>
+                  <div className="font-bold text-sm">PKR 2,000</div>
                 </div>
-                <div className="mt-2 md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
+                <div className="mt-2 text-[10px] uppercase tracking-wider opacity-90">
                   See Plans
                 </div>
                 <span
@@ -127,21 +120,17 @@ We can’t wait to see you there!`}
               </button>
 
               <button
-                className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors h-48 md:h-42 flex flex-col items-center"
+                className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors h-48 flex flex-col items-center"
                 onClick={() => handleDaySelect("DAY3")}
               >
                 <div className="flex-1 flex flex-col items-center justify-center space-y-2">
-                  <div className="font-extrabold text-base md:text-lg tracking-wide">
+                  <div className="font-extrabold text-base tracking-wide">
                     DAY 03
                   </div>
-                  <div className="text-xs md:text-sm opacity-90">
-                    Starting Price
-                  </div>
-                  <div className="font-bold text-sm md:text-base">
-                    PKR 1,500
-                  </div>
+                  <div className="text-xs opacity-90">Starting Price</div>
+                  <div className="font-bold text-sm">PKR 1,500</div>
                 </div>
-                <div className="mt-2 md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
+                <div className="mt-2 text-[10px] uppercase tracking-wider opacity-90">
                   See Plans
                 </div>
                 <span
@@ -149,6 +138,116 @@ We can’t wait to see you there!`}
                   className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-[#949494]"
                 />
               </button>
+              
+
+              <button
+                className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors h-48 flex flex-col items-center"
+                onClick={() => handleDaySelect("ALL_DAYS")}
+              >
+                <div className="flex-1 flex flex-col items-center justify-center space-y-2">
+                  <div className="font-extrabold text-base tracking-wide">
+                    All Days
+                  </div>
+                  <div className="text-xs opacity-90">Starting Price</div>
+                  <div className="font-bold text-sm">PKR 4,000</div>
+                </div>
+                <div className="mt-2 text-[10px] uppercase tracking-wider opacity-90">
+                  See Plans
+                </div>
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-[#949494]"
+                />
+              </button>
+            </div>
+
+            {/* Large Screen: Day cards in row, All Days centered below */}
+            <div className="hidden sm:block">
+              {/* Three day cards in a row */}
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                <button
+                  className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors md:h-42 flex flex-col items-center"
+                  onClick={() => handleDaySelect("DAY1")}
+                >
+                  <div className="flex-1 flex flex-col items-center justify-center space-y-2">
+                    <div className="font-extrabold md:text-lg tracking-wide">
+                      DAY 01
+                    </div>
+                    <div className="md:text-sm opacity-90">Starting Price</div>
+                    <div className="font-bold md:text-base">PKR 1,000</div>
+                  </div>
+                  <div className="md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
+                    See Plans
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-[#949494]"
+                  />
+                </button>
+
+                <button
+                  className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors md:h-42 flex flex-col items-center"
+                  onClick={() => handleDaySelect("DAY2")}
+                >
+                  <div className="flex-1 flex flex-col items-center justify-center space-y-2">
+                    <div className="font-extrabold md:text-lg tracking-wide">
+                      DAY 02
+                    </div>
+                    <div className="md:text-sm opacity-90">Starting Price</div>
+                    <div className="font-bold md:text-base">PKR 2,000</div>
+                  </div>
+                  <div className="md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
+                    See Plans
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-[#949494]"
+                  />
+                </button>
+
+                <button
+                  className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors md:h-42 flex flex-col items-center"
+                  onClick={() => handleDaySelect("DAY3")}
+                >
+                  <div className="flex-1 flex flex-col items-center justify-center space-y-2">
+                    <div className="font-extrabold md:text-lg tracking-wide">
+                      DAY 03
+                    </div>
+                    <div className="md:text-sm opacity-90">Starting Price</div>
+                    <div className="font-bold md:text-base">PKR 1,500</div>
+                  </div>
+                  <div className="md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
+                    See Plans
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-[#949494]"
+                  />
+                </button>
+              </div>
+
+              {/* All Days Card - Centered */}
+              <div className="flex justify-center">
+                <button
+                  className="bg-[#949494] text-white hover:bg-[#4a0404] relative rounded-lg p-4 text-center transition-colors md:h-42 flex flex-col items-center w-64"
+                  onClick={() => handleDaySelect("ALL_DAYS")}
+                >
+                  <div className="flex-1 flex flex-col items-center justify-center space-y-2">
+                    <div className="font-extrabold md:text-lg tracking-wide">
+                      All Days
+                    </div>
+                    <div className="md:text-sm opacity-90">Starting Price</div>
+                    <div className="font-bold md:text-base">PKR 4,000</div>
+                  </div>
+                  <div className="md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
+                    See Plans
+                  </div>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent border-t-[#949494]"
+                  />
+                </button>
+              </div>
             </div>
           </div>
         )}
