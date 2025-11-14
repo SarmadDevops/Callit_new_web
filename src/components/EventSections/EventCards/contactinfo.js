@@ -7,10 +7,11 @@ const ContactInfo = () => {
         <h3 className="font-bold text-gray-900 mb-4">CONTACT FOR TICKETS</h3>
         <div className="space-y-3">
           {[
-            { name: "HASHIR MALIK", phone: "+92 320 4684683" },
-            { name: "NABIHA NOOR", phone: "+92 327 4945665" },
-            { name: "EMAN QAMAR", phone: "+92 328 1703878" },
-            { name: "M.MUBEEN", phone: "+92 317 0650001" },
+            // { name: "HASHIR MALIK", phone: "+92 320 4684683" },
+            // { name: "NABIHA NOOR", phone: "+92 327 4945665" },
+            // { name: "EMAN QAMAR", phone: "+92 328 1703878" },
+            // { name: "M.MUBEEN", phone: "+92 317 0650001" },
+            { name: "ARHAM BIN REHAN", phone: "+92 321 3752520" },
             { name: "AYESHA SHEIKH", phone: "+92 324 5954207" },
           ].map((contact, index) => (
             <div

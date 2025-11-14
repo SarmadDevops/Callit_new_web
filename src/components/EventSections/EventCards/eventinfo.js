@@ -306,9 +306,9 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
             <div>
               <span className="font-semibold text-gray-900">Tags:</span>
               <p className="text-gray-700 text-sm">
-                Featuring Bayaan Brought To You By Humanity Alliance
-                Organization Managed By Call It Studio August 24, 2025 7:00 PM -
-                10:00 PM Alhamra Hall | Lahore
+                Brought To You By Humanity Alliance
+                Organization Managed By Call It Studio December 5th - December 7th, 2025
+                Alhamra Cultural Complex | Gulberg III, Lahore
               </p>
             </div>
           </div>
@@ -324,7 +324,7 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
                 <span className=" text-gray-700 px-3 py-1 rounded-full text-sm">
                   Music Festival
                 </span>
-                <span className=" text-gray-700 px-3 py-1 rounded-full text-sm flex items-center gap-1">
+                {/* <span className=" text-gray-700 px-3 py-1 rounded-full text-sm flex items-center gap-1">
                   Share
                   <svg
                     className="w-4 h-4"
@@ -339,7 +339,7 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
                       d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
                     />
                   </svg>
-                </span>
+                </span> */}
               </div>
             </div>
           </div>
