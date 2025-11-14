@@ -285,12 +285,12 @@ const TermsAndConditions = () => {
             <div className="flex items-start gap-4">
               <i className="fas fa-map-marker-alt mt-1.5 text-lg text-gray-300"></i>
               <a
-                href="https://maps.google.com/?q=H96C+9XM,+Peer+Muhammad+Sadiq+Rd+Mughalpura,+Lahore,+54840"
+                href="https://www.google.com/maps/search/?api=1&query=24+Griffin+LARECHS+Scheme,+Near+Railway+Griffin+Institute,+Mughalpura,+Lahore"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors cursor-pointer"
               >
-                H96C+9XM, Peer Muhammad Sadiq Rd Mughalpura, Lahore, 54840
+                24 Griffin Larechs scheme Near RAILWAY GRIFFIN INSTITUTE Mughalpura, Lahore
               </a>
             </div>
           </div>

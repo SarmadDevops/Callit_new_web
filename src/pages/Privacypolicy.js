@@ -274,8 +274,7 @@ const PrivacyPolicy = () => {
             </li>
           </ul>
           <p className="text-black leading-relaxed text-lg mt-4">
-            Contact us at contact@callit-studio.com or H96C+9XM, Peer Muhammad
-            Sadiq Rd Mughalpura, Lahore, 54840. We respond within 30 days (or 15
+            Contact us at contact@callit-studio.com or 24 Griffin Larechs scheme Near RAILWAY GRIFFIN INSTITUTE Mughalpura, Lahore We respond within 30 days (or 15
             days under Pakistan's Data Protection Bill, 2023, if applicable). EU
             residents may contact their data protection authority.
           </p>
@@ -317,12 +316,12 @@ const PrivacyPolicy = () => {
             <div className="flex items-start gap-4">
               <i className="fas fa-map-marker-alt mt-1.5 text-lg text-gray-300"></i>
               <a
-                href="https://maps.google.com/?q=H96C+9XM,+Peer+Muhammad+Sadiq+Rd+Mughalpura,+Lahore,+54840"
+                href="https://www.google.com/maps/search/?api=1&query=24+Griffin+LARECHS+Scheme,+Near+Railway+Griffin+Institute,+Mughalpura,+Lahore"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-base sm:text-lg text-gray-300 hover:text-white transition-colors cursor-pointer"
               >
-                H96C+9XM, Peer Muhammad Sadiq Rd Mughalpura, Lahore, 54840
+                24 Griffin Larechs scheme Near RAILWAY GRIFFIN INSTITUTE Mughalpura, Lahore
               </a>
             </div>
           </div>

@@ -153,12 +153,12 @@ const Footer = () => {
           <li className="flex items-start gap-2 justify-center ml-14 sm:ml-0 lg:justify-start">
             <i className="fas fa-map-marker-alt text-sm sm:text-base lg:text-lg text-gray-300 flex-shrink-0 mt-0.5 lg:mt-1"></i>
             <a
-              href="https://maps.google.com/?q=H96C+9XM,+Peer+Muhammad+Sadiq+Rd+Mughalpura,+Lahore,+54840"
+              href="https://www.google.com/maps/search/?api=1&query=24+Griffin+LARECHS+Scheme,+Near+Railway+Griffin+Institute,+Mughalpura,+Lahore"
               target="_blank"
               rel="noopener noreferrer"
               className="text-xs sm:text-sm lg:text-base text-gray-300 hover:text-white transition-colors text-left leading-relaxed break-words max-w-[280px] sm:max-w-none"
             >
-              H96C+9XM, Peer Muhammad Sadiq Rd Mughalpura, Lahore, 54840
+              24 Griffin Larechs scheme Near RAILWAY GRIFFIN INSTITUTE Mughalpura, Lahore
             </a>
           </li>
           {/* Phone */}
