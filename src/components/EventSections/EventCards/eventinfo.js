@@ -3,17 +3,18 @@ import { useMemo, useState } from "react";
 const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
   const priceTable = useMemo(
     () => ({
-      DAY1: { VIP: 2500, GOLD: 1500, STANDARD: 1000 },
-      DAY2: { VIP: 5000, GOLD: 3500, STANDARD: 2500 },
-      DAY3: { VIP: 3000, GOLD: 2000, STANDARD: 1500 },
+      DAY1: { VIP: 2500, GOLD: 1500, STANDARD: 1000 ,COUPLEPASS: 1800 , GROUPOF4: 3500},
+      DAY2: { VIP: 5000, GOLD: 3500, STANDARD: 2500 ,COUPLEPASS: 4000 , GROUPOF4: 7000},
+      DAY3: { VIP: 3000, GOLD: 2000, STANDARD: 1500 ,COUPLEPASS: 2500 , GROUPOF4: 5000},
       ALL_DAYS: { Singlepass: 4000  },
+
     }),
     []
   );
 
   const EarlyBirdPriceTable = useMemo(
     () => ({
-      DAY2: { VIP: 4000, GOLD: 3000, STANDARD: 2000 },
+      DAY2: { VIP: 4000, GOLD: 3000, STANDARD: 2000 ,COUPLEPASS: 3500 , GROUPOF4: 5600},
     }),
     []
   );
@@ -45,7 +46,7 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
         </div>
 
         {/* Ticket Cards Grid */}
-        <div className={`grid gap-4 mb-6 ${
+        <div className={`grid gap-4 mb-6 pl-16 w-72  sm:w-full sm:pl-0 ${
           selectedDay === "ALL_DAYS" 
             ? "grid-cols-1 place-items-center" 
             : "grid-cols-1 sm:grid-cols-3"
@@ -93,7 +94,7 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
               selectedTicket?.type === "VIP"
                 ? "bg-[#4a0404] text-white hover:bg-[#4a0404]"
                 : "bg-[#949494] text-white hover:bg-[#4a0404]"
-            } relative rounded-lg p-4 text-center transition-colors h-56 md:h-60 flex flex-col items-center`}
+            } relative rounded-lg  p-4 text-center transition-colors h-56 md:h-60 flex flex-col items-center`}
             onClick={() => handleTicketSelect("VIP")}
           >
             <div className="flex-1 flex flex-col items-center justify-center space-y-2">
@@ -240,6 +241,105 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
               aria-hidden="true"
               className={`pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent ${
                 selectedTicket?.type === "STANDARD"
+                  ? "border-t-[#4a0404]"
+                  : "border-t-[#949494]"
+              }`}
+            />
+          </button>
+
+
+            <button
+            className={`${
+              selectedTicket?.type === "COUPLEPASS"
+                ? "bg-[#4a0404] text-white hover:bg-[#4a0404]"
+                : "bg-[#949494] text-white hover:bg-[#4a0404]"
+            } relative rounded-lg p-4 text-center transition-colors h-56 md:h-44 lg:h-48 xl:h-44 flex flex-col items-center overflow-y-hidden`}
+            onClick={() => handleTicketSelect("COUPLEPASS")}
+          >
+            <div className="flex-1 flex flex-col justify-center  space-y-2 ">
+              <h3 className="font-extrabold text-base md:text-md xl:text-lg tracking-wide ">
+                COUPLE PASS
+              </h3>
+              <p className="text-xs md:text-sm opacity-90">AVAILABLE</p>
+            
+            </div>
+            <p className="mt-2 md:mt-3 font-bold text-sm md:text-base">
+              PKR{" "}
+              {(
+                priceTable[selectedDay]?.COUPLEPASS || priceTable.DAY1.COUPLEPASS
+              ).toLocaleString()}
+            </p>
+            {isVipEarlyBird && (
+              <button
+                className="mt-2 px-3 py-1.5 bg-yellow-600 hover:bg-yellow-700 text-white text-xs md:text-sm font-semibold rounded-md transition-colors shadow-sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEarlyBirdSelect("COUPLEPASS");
+                }}
+              >
+                <div>Early Bird </div>
+                <div>
+                  PKR{" "}
+                  {(
+                    EarlyBirdPriceTable[selectedDay]?.COUPLEPASS ||
+                    priceTable.DAY1.COUPLEPASS
+                  ).toLocaleString()}
+                </div>
+              </button>
+            )}
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent ${
+                selectedTicket?.type === "COUPLEPASS"
+                  ? "border-t-[#4a0404]"
+                  : "border-t-[#949494]"
+              }`}
+            />
+          </button>
+
+            <button
+            className={`${
+              selectedTicket?.type === "GROUPOF4"
+                ? "bg-[#4a0404] text-white hover:bg-[#4a0404]"
+                : "bg-[#949494] text-white hover:bg-[#4a0404]"
+            } relative rounded-lg p-4 text-center transition-colors h-56 md:h-44 lg:h-48 xl:h-44  flex flex-col items-center`}
+            onClick={() => handleTicketSelect("GROUPOF4")}
+          >
+            <div className="flex-1 flex flex-col items-center justify-center space-y-2">
+              <h3 className="font-extrabold text-base md:text-lg tracking-wide">
+                GROUP OF 4
+              </h3>
+              <p className="text-xs md:text-sm opacity-90">AVAILABLE</p>
+             
+            </div>
+            <p className="mt-2 md:mt-3  font-bold text-sm md:text-base">
+              PKR{" "}
+              {(
+                priceTable[selectedDay]?.GROUPOF4 || priceTable.DAY1.GROUPOF4
+              ).toLocaleString()}
+            </p>
+            {/* {isVipEarlyBird && (
+              <button
+                className="mt-2 px-3 py-1.5 bg-yellow-600 hover:bg-yellow-700 text-white text-xs md:text-sm font-semibold rounded-md transition-colors shadow-sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEarlyBirdSelect("GROUPOF4");
+                }}
+              >
+                <div>Early Bird </div>
+                <div>
+                  PKR{" "}
+                  {(
+                    EarlyBirdPriceTable[selectedDay]?.GROUPOF4 ||
+                    priceTable.DAY1.GROUPOF4
+                  ).toLocaleString()}
+                </div>
+              </button>
+            )} */}
+            <span
+              aria-hidden="true"
+              className={`pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-6 border-l-transparent border-r-transparent ${
+                selectedTicket?.type === "GROUPOF4"
                   ? "border-t-[#4a0404]"
                   : "border-t-[#949494]"
               }`}
