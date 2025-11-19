@@ -239,9 +239,9 @@ We can’t wait to see you there!`}
              >
                  <div className="flex-1 flex flex-col items-center justify-center space-y-2">
                     <div className="font-extrabold md:text-lg tracking-wide">
-                      All Days
+                      3 Days Pass
                     </div>
-                    <div className="md:text-sm opacity-90">Starting Price</div>
+                    <div className="md:text-sm opacity-90">Single Person</div>
                     <div className="font-bold md:text-base">PKR 4,000</div>
                   </div>
                   <div className="md:mt-3 text-[10px] uppercase tracking-wider opacity-90">
