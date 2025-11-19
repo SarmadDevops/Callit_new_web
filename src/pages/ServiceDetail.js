@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import serviceDetailBg from "../assets/serviceDetail.png";
 import { services } from "../data/services";
+import ServicesPricingPlan from "../components/Servicespricingplan";
 
 const ServiceDetail = () => {
   const { id } = useParams();
@@ -321,6 +322,7 @@ const ServiceDetail = () => {
             <div className="absolute right-0 top-0 h-full w-1/4 sm:w-1/3 bg-white/5 rounded-l-full"></div>
           </div>
         </div>
+        <ServicesPricingPlan/>
       </div>
     </>
   );
