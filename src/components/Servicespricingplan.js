@@ -1,7 +1,9 @@
-import React from 'react';
-import { Check } from 'lucide-react';
+import React, { useState } from "react";
+import { Check } from "lucide-react";
+import ContactPopup from "./ContactPopup";
 
 export default function ServicesPricingPlan() {
+  const [showContact, setShowContact] = useState(false);
   const plans = [
     {
       name: "Starter Spark",
@@ -15,8 +17,8 @@ export default function ServicesPricingPlan() {
         "Monthly analytics summary",
         "Paid ads management (Google or) Facebook/Instagram",
         "Basic tech guidance",
-        "Minimal revisions"
-      ]
+        "Minimal revisions",
+      ],
     },
     {
       name: "Marketing Maestro",
@@ -31,8 +33,8 @@ export default function ServicesPricingPlan() {
         "Core team",
         "Paid ads management (Google or) Facebook/Instagram",
         "Basic tech guidance",
-        "Minimal revisions"
-      ]
+        "Minimal revisions",
+      ],
     },
     {
       name: "Growth Guru",
@@ -46,9 +48,9 @@ export default function ServicesPricingPlan() {
         "Bi-weekly analytics and reporting",
         "Paid ads management (Google or) Facebook/Instagram",
         "Basic tech guidance",
-        "Minimal revisions"
-      ]
-    }
+        "Minimal revisions",
+      ],
+    },
   ];
 
   return (
@@ -57,15 +59,15 @@ export default function ServicesPricingPlan() {
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-white mb-12 sm:mb-16 px-4">
           Pricing Plan
         </h1>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {plans.map((plan, index) => (
             <div
               key={index}
               className={`relative bg-red-950/50 backdrop-blur-sm rounded-3xl p-6 sm:p-8 border-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl ${
-                plan.popular 
-                  ? 'border-red-400 shadow-xl shadow-red-500/20' 
-                  : 'border-red-800/50 hover:border-red-700'
+                plan.popular
+                  ? "border-red-400 shadow-xl shadow-red-500/20"
+                  : "border-red-800/50 hover:border-red-700"
               }`}
             >
               {/* Header */}
@@ -78,7 +80,7 @@ export default function ServicesPricingPlan() {
                     {plan.badge}
                   </span>
                 </div>
-                
+
                 <div className="flex items-baseline mb-6">
                   <span className="text-4xl sm:text-5xl font-bold text-white">
                     {plan.price}
@@ -87,8 +89,11 @@ export default function ServicesPricingPlan() {
                     {plan.period}
                   </span>
                 </div>
-                
-                <button className="w-full py-3 px-6 bg-transparent border-2 border-red-400 text-red-300 rounded-full font-semibold hover:bg-red-400 hover:text-white transition-all duration-300">
+
+                <button
+                  className="w-full py-3 px-6 bg-transparent border-2 border-red-400 text-red-300 rounded-full font-semibold hover:bg-red-400 hover:text-white transition-all duration-300"
+                  onClick={() => setShowContact(true)}
+                >
                   Get Started
                 </button>
               </div>
@@ -100,7 +105,10 @@ export default function ServicesPricingPlan() {
                 </h3>
                 <ul className="space-y-3">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3 text-red-100">
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 text-red-100"
+                    >
                       <Check className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 flex-shrink-0 mt-1" />
                       <span className="text-xs sm:text-sm leading-relaxed break-words">
                         {feature}
@@ -113,6 +121,10 @@ export default function ServicesPricingPlan() {
           ))}
         </div>
       </div>
+      <ContactPopup
+        isOpen={showContact}
+        onClose={() => setShowContact(false)}
+      />
     </div>
   );
 }
