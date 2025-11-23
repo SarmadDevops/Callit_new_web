@@ -5,11 +5,13 @@ import Services from "../components/sections/Services";
 import WhyChooseUs from "../components/sections/WhyChooseUs";
 // import OurBestServices from "../components/sections/OurBestServices";
 import Testimonials from "../components/sections/Testimonials";
+import EventBanner from "../components/EventBanner/Eventbanner";
 
 function Home() {
   return (
     <>
       <Hero />
+      <EventBanner />
       <About />
       <Services />
       <Testimonials />

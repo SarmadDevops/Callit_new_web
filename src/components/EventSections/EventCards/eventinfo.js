@@ -19,7 +19,7 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
     []
   );
   const [selectedTicket, setSelectedTicket] = useState(null);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
 
   const handleTicketSelect = (ticketType) => {
     const dayPrices = priceTable[selectedDay] || priceTable.DAY1;
@@ -350,7 +350,7 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
         </div>
 
         {/* Ticket Selection Dropdown */}
-        {selectedTicket && (
+        {/* {selectedTicket && (
           <div className="mt-6 bg-[#4a0404] text-white rounded-lg p-4">
             <div className="flex justify-between items-center mb-4">
               <div>
@@ -386,15 +386,17 @@ const EventInfo = ({ selectedDay = "DAY1", onProceedCheckout }) => {
               </span>
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Proceed to Checkout Button - Outside the card */}
       {selectedTicket && (
         <div className="mb-8">
+          <a href="https://forms.gle/cMCiZweHdEAasFPe8" target="_blank" rel="noopener noreferrer">
           <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-lg transition-colors text-lg">
             PROCEED TO CHECKOUT
           </button>
+          </a>
         </div>
       )}
 
