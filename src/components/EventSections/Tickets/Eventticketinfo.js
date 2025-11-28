@@ -1,12 +1,35 @@
 import React, { useState } from "react";
- import { createOrder } from "../../../api/orderApi.js"; // adjust path as needed
+import { createOrder, getPayFastToken, initializePayFastPayment, debugPayFastFormData } from "../../../api/orderApi.js"; // adjust path as needed
 const EventTicketInfo = () => {
 
 
 const handleCheckout = async () => {
   try {
+    // Validate required fields
+    if (!accountInfo.name.trim()) {
+      alert("Please enter your name");
+      return;
+    }
+    if (!accountInfo.phone.trim()) {
+      alert("Please enter your phone number");
+      return;
+    }
+
+    // Collect all ticket holder names in order
+    const allTickets = getAllTickets();
+    const collectedNames = allTickets.map((ticket) =>
+      ticketHolderNames[`${ticket.day}-${ticket.type}-${ticket.index}`] || ""
+    );
+
+    // Check if all names are filled
+    if (collectedNames.some(name => !name.trim())) {
+      alert("Please fill in names for all ticket holders");
+      return;
+    }
+
     // Convert tickets object into an array suitable for backend
     const ticketsPurchased = [];
+    let nameIndex = 0;
 
     Object.keys(tickets).forEach((dayKey) => {
       const dayTickets = tickets[dayKey];
@@ -15,11 +38,17 @@ const handleCheckout = async () => {
       Object.keys(dayTickets).forEach((typeKey) => {
         const quantity = dayTickets[typeKey];
         if (quantity > 0) {
+          // Collect names for this ticket type
+          const ticketNames = [];
+          for (let i = 0; i < quantity; i++) {
+            ticketNames.push(collectedNames[nameIndex++]);
+          }
+
           ticketsPurchased.push({
             eventDay,
             ticketType: typeKey, // e.g., vip, goldEarlyBird
             quantity,
-            names: ticketHolderNames[dayKey]?.[typeKey] || Array(quantity).fill(""), // use ticketHolderNames if available
+            names: ticketNames,
             price: ticketPrices[dayKey][typeKey] // take price from your ticketPrices mapping
           });
         }
@@ -34,15 +63,132 @@ const handleCheckout = async () => {
       ticketsPurchased
     };
 
-    // Call your backend API
-    const response = await createOrder(orderData);
+    // Step 1: Create order
+    console.log("Creating order...", orderData);
+    const orderResponse = await createOrder(orderData);
+    console.log("Order created:", orderResponse);
 
-    // Redirect to PayFast URL returned from backend
-    if (response?.payfastUrl) {
-      window.location.href = response.payfastUrl;
+    if (!orderResponse?.order?.orderId) {
+      console.error("Order ID not received from backend");
+      alert("Something went wrong: Order ID not received.");
+      return;
+    }
+
+    // Step 2: Get PayFast access token
+    const orderId = orderResponse.order.orderId;
+    const totalAmount = calculateTotal();
+    console.log("Getting PayFast token for order:", orderId, "Amount:", totalAmount);
+    debugger
+    const tokenResponse = await getPayFastToken(orderId, totalAmount);
+    debugger
+    console.log("PayFast token received:", tokenResponse);
+
+    if (!tokenResponse?.token) {
+      console.error("Token not received from PayFast");
+      alert("Something went wrong: Could not get payment token.");
+      return;
+    }
+
+    // Step 3: Initialize PayFast payment with token
+    const token = tokenResponse.token;
+    console.log("Initializing PayFast payment with token for order:", orderId);
+    debugger
+    const paymentResponse = await initializePayFastPayment(orderId, token);
+    console.log("PayFast payment initialized:", paymentResponse);
+
+    // Step 4: Submit form to PayFast checkout URL
+    if (paymentResponse?.checkoutUrl && paymentResponse?.formData) {
+      console.log("PayFast Checkout URL:", paymentResponse.checkoutUrl);
+      console.log("PayFast Form Data:", paymentResponse.formData);
+
+      // Debug: Log form data structure for signature validation
+      debugPayFastFormData(paymentResponse.formData);
+
+    // Validate required fields before submission (PayFast Pakistan fields)
+const requiredFields = [
+  "MERCHANT_ID",
+  "TOKEN",        // ✅ we now expect TOKEN from backend
+  "TXNAMT",
+  "BASKET_ID",
+  "MERCHANT_NAME",
+];
+
+const missingFields = requiredFields.filter(
+  (field) =>
+    !paymentResponse.formData[field] ||
+    paymentResponse.formData[field] === ""
+);
+
+if (missingFields.length > 0) {
+  console.error("Missing required PayFast fields:", missingFields);
+  alert(
+    `Error: Missing payment fields (${missingFields.join(
+      ", "
+    )}). Please contact support.`
+  );
+  return;
+}
+
+
+      // IMPORTANT: Form submission is DISABLED for debugging
+      // To enable auto-redirect to PayFast, uncomment the form.submit() line below
+
+      console.log("============================================");
+      console.log("PAYFAST CHECKOUT READY");
+      console.log("============================================");
+      console.log("Checkout URL:", paymentResponse.checkoutUrl);
+      console.log("Form Data:", paymentResponse.formData);
+      console.log("============================================");
+      console.log("To verify form data, check the console above");
+      console.log("All fields look correct? Ready to submit?");
+      console.log("============================================\n");
+
+      // Create a hidden form to submit to PayFast
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = paymentResponse.checkoutUrl;
+      form.enctype = "application/x-www-form-urlencoded";
+      form.style.display = "none";
+      form.target = "_blank"; // Ensure form submits in same tab
+
+      // Add all form data as hidden inputs
+      Object.keys(paymentResponse.formData).forEach((key) => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = String(paymentResponse.formData[key]).trim();
+        form.appendChild(input);
+        console.log(
+          `Form field: ${key} = ${paymentResponse.formData[key]} (length: ${String(paymentResponse.formData[key]).length})`
+        );
+      });
+
+      // Append form to body
+      document.body.appendChild(form);
+      console.log("Form element created with", form.children.length, "inputs");
+
+      // ENABLED: Auto-submit to PayFast
+      console.log("\n✅ SUBMITTING FORM TO PAYFAST...");
+      console.log("Redirecting to PayFast payment gateway...");
+
+      // TEST MODE: Uncomment to test success/cancel pages without PayFast
+      // const testMode = true;
+      // if (testMode) {
+      //   const transactionId = `TXN-${Date.now()}`;
+      //   const mode = window.confirm("Click OK for Success, Cancel for Failure");
+      //   if (mode) {
+      //     window.location.href = `/success?orderId=${orderId}&transactionId=${transactionId}&amount=${totalAmount}`;
+      //   } else {
+      //     window.location.href = `/cancel?orderId=${orderId}&reason=Payment+cancelled+by+user`;
+      //   }
+      //   return;
+      // }
+
+      form.submit();
     } else {
-      console.error("PayFast URL not returned from backend");
-      alert("Something went wrong: PayFast URL not received.");
+      console.error("Checkout URL or form data not returned from payment initialization");
+      console.error("Response:", paymentResponse);
+      alert("Something went wrong: Payment checkout data not received. Please try again.");
     }
   } catch (error) {
     console.error("Checkout failed:", error);
@@ -1321,7 +1467,7 @@ const handleCheckout = async () => {
                 Total Amount
               </span>
               <span className="text-4xl font-bold text-white">
-                Rs {calculateTotal()}
+                PKR {calculateTotal().toLocaleString()}
               </span>
             </div>
           </div>
@@ -1414,7 +1560,8 @@ const handleCheckout = async () => {
         {getTotalTickets() > 0 && (
           <button
             onClick={handleCheckout}
-            className="w-full mt-8 py-5 rounded-full font-bold text-xl uppercase tracking-wider transition-all transform hover:scale-105 shadow-2xl bg-gradient-to-r from-[#5c1919] to-[#7a2323] hover:from-[#4a1414] hover:to-[#6b1f1f] text-white cursor-pointer"
+            disabled={!accountInfo.name.trim() || !accountInfo.phone.trim()}
+            className="w-full mt-8 py-5 rounded-full font-bold text-xl uppercase tracking-wider transition-all transform hover:scale-105 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed bg-gradient-to-r from-[#5c1919] to-[#7a2323] hover:disabled:scale-100 hover:from-[#4a1414] hover:to-[#6b1f1f] text-white cursor-pointer"
           >
             Proceed to Payment (PKR {calculateTotal().toLocaleString()})
           </button>

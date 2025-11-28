@@ -14,6 +14,8 @@ import FasanaEIshqDetail from "./pages/FasanaEIshqDetail";
 import PrivacyPolicy from "./pages/Privacypolicy";
 import TermsAndConditions from "./pages/Termsandconditions";
 import Ticketinfo from "./pages/Ticketinfo";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 
 function App() {
   return (
@@ -32,7 +34,9 @@ function App() {
           <Route path="/fasana-e-ishq" element={<FasanaEIshqDetail />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsAndConditions />} />
-          <Route path="/ticketinfo" element={<Ticketinfo />} /> 
+          <Route path="/ticketinfo" element={<Ticketinfo />} />
+          <Route path="/success" element={<PaymentSuccess />} />
+          <Route path="/cancel" element={<PaymentCancel />} />
         </Routes>
         <Footer />
       </div>
