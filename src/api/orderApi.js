@@ -2,7 +2,6 @@ import axios from "axios";
 
 // Backend URLs
 const ORDERS_BASE_URL = "http://localhost:5000/api/orders/create";
-const PAYFAST_GET_TOKEN_URL = "http://localhost:5000/api/payfast/get-token";
 const PAYFAST_REDIRECT_URL = "http://localhost:5000/api/payfast/redirect";
 
 // PayFast Configuration
@@ -48,8 +47,22 @@ export const getPayFastToken = async (orderId, amount) => {
 // Step 2: Initialize PayFast payment with token
 export const initializePayFastPayment = async (orderId, token) => {
   try {
-    const response = await axios.post(PAYFAST_REDIRECT_URL, { orderId, token });
-    debugger
+    const payload = {
+      orderId,
+      token,
+      returnUrl: process.env.REACT_APP_PAYFAST_RETURN_URL || "http://localhost:3000/success",
+      cancelUrl: process.env.REACT_APP_PAYFAST_CANCEL_URL || "http://localhost:3000/cancel",
+      notifyUrl: process.env.REACT_APP_PAYFAST_NOTIFY_URL || "http://localhost:5000/api/payfast/callback"
+    };
+
+    console.log("Initializing PayFast payment with URLs:", {
+      orderId,
+      returnUrl: payload.returnUrl,
+      cancelUrl: payload.cancelUrl,
+      notifyUrl: payload.notifyUrl
+    });
+
+    const response = await axios.post(PAYFAST_REDIRECT_URL, payload);
     return response.data;
   } catch (error) {
     console.error("Error initializing PayFast payment:", error.response?.data || error.message);

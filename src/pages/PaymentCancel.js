@@ -1,22 +1,67 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { AlertCircle, Home, RotateCcw } from "lucide-react";
+import axios from "axios";
 
 const PaymentCancel = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [cancelDetails, setCancelDetails] = useState(null);
+  const [verifying, setVerifying] = useState(true);
+  const [paymentStatus, setPaymentStatus] = useState("pending");
 
   useEffect(() => {
-    // Get cancellation details from URL params if available
-    const orderId = searchParams.get("orderId");
-    const reason = searchParams.get("reason") || "User cancelled the transaction";
+    const verifyPayment = async () => {
+      let orderId = searchParams.get("orderId");
+      const reason = searchParams.get("reason") || "Payment cancelled by PayFast gateway";
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
-    setCancelDetails({
-      orderId: orderId || "ORD-XXXXXX",
-      reason: reason,
-      timestamp: new Date().toLocaleString(),
-    });
+      // If no orderId in URL, check localStorage (fallback)
+      if (!orderId) {
+        console.warn("[CANCEL PAGE] No orderId in URL, checking localStorage");
+        orderId = localStorage.getItem("lastOrderId");
+        if (orderId) {
+          console.log(`[CANCEL PAGE] Found orderId in localStorage: ${orderId}`);
+        }
+      }
+
+      if (!orderId) {
+        console.error("[CANCEL PAGE] No Order ID found in URL or localStorage");
+        setCancelDetails({
+          orderId: "ORD-XXXXXX",
+          reason: reason,
+          timestamp: new Date().toLocaleString(),
+        });
+        setVerifying(false);
+        return;
+      }
+
+      try {
+        console.log(`[CANCEL PAGE] Fetching order details for Order: ${orderId}`);
+        const response = await axios.get(`${backendUrl}/api/orders/${orderId}`);
+
+        console.log(`[CANCEL PAGE] Order Status from backend: ${response.data?.paymentStatus}`);
+        setCancelDetails({
+          orderId: orderId,
+          reason: reason,
+          timestamp: new Date().toLocaleString(),
+        });
+
+        setPaymentStatus(response.data?.paymentStatus || "failed");
+      } catch (error) {
+        console.error("[CANCEL PAGE] Could not fetch order:", error.message);
+        setCancelDetails({
+          orderId: orderId || "ORD-XXXXXX",
+          reason: reason,
+          timestamp: new Date().toLocaleString(),
+        });
+        setPaymentStatus("failed");
+      }
+
+      setVerifying(false);
+    };
+
+    verifyPayment();
   }, [searchParams]);
 
   return (
@@ -75,7 +120,22 @@ const PaymentCancel = () => {
                 </p>
               </div>
 
-              {/* Possible Reasons */}
+              {/* Status Message */}
+              {verifying ? (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+                  <p className="text-blue-700 text-center font-medium">
+                    ⏳ Verifying order status with server...
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
+                  <p className="text-red-700 text-center font-medium">
+                    Order Status: {paymentStatus}
+                  </p>
+                </div>
+              )}
+
+              {/* Common Reasons */}
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
                 <h3 className="text-blue-900 font-semibold mb-3">
                   Common reasons for cancellation:

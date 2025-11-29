@@ -1,24 +1,93 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { CheckCircle, Home, Download } from "lucide-react";
+import axios from "axios";
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [orderDetails, setOrderDetails] = useState(null);
+  const [verifying, setVerifying] = useState(true);
+  const [paymentStatus, setPaymentStatus] = useState("pending");
 
   useEffect(() => {
-    // Get order details from URL params if available
-    const orderId = searchParams.get("orderId");
-    const transactionId = searchParams.get("transactionId");
-    const amount = searchParams.get("amount");
+    const verifyPayment = async () => {
+      let orderId = searchParams.get("orderId");
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
 
-    setOrderDetails({
-      orderId: orderId || "ORD-XXXXXX",
-      transactionId: transactionId || "TXN-XXXXXX",
-      amount: amount || "0",
-      timestamp: new Date().toLocaleString(),
-    });
+      // If no orderId in URL, check localStorage (fallback)
+      if (!orderId) {
+        console.warn("[SUCCESS PAGE] No orderId in URL, checking localStorage");
+        orderId = localStorage.getItem("lastOrderId");
+        if (orderId) {
+          console.log(`[SUCCESS PAGE] Found orderId in localStorage: ${orderId}`);
+        }
+      }
+
+      if (!orderId) {
+        console.error("[SUCCESS PAGE] No Order ID found in URL or localStorage");
+        setOrderDetails({
+          orderId: "ORD-XXXXXX",
+          transactionId: "TXN-XXXXXX",
+          amount: "0",
+          timestamp: new Date().toLocaleString(),
+        });
+        setVerifying(false);
+        return;
+      }
+
+      try {
+        console.log(`[SUCCESS PAGE] Fetching order details for Order: ${orderId}`);
+        const response = await axios.get(`${backendUrl}/api/orders/${orderId}`);
+        const order = response.data;
+
+        console.log(`[SUCCESS PAGE] Order fetched - Status: ${order?.paymentStatus}`);
+
+        // Get transaction ID from payment record if available
+        let transactionId = "TXN-XXXXXX";
+        let amount = order?.totalAmount || "0";
+
+        // Try to get transaction details from payment record
+        try {
+          const paymentResponse = await axios.get(`${backendUrl}/api/payfast/status/${orderId}`);
+          if (paymentResponse.data?.payfastResponse?.TXNID) {
+            transactionId = paymentResponse.data.payfastResponse.TXNID;
+            console.log(`[SUCCESS PAGE] Transaction ID found: ${transactionId}`);
+          }
+        } catch (err) {
+          console.warn("[SUCCESS PAGE] Could not fetch payment record:", err.message);
+        }
+
+        setOrderDetails({
+          orderId: orderId,
+          transactionId: transactionId,
+          amount: amount,
+          timestamp: new Date().toLocaleString(),
+        });
+
+        // Verify payment status
+        if (order?.paymentStatus === "paid") {
+          console.log(`[SUCCESS PAGE] Payment confirmed - Order Status: paid`);
+          setPaymentStatus("confirmed");
+        } else {
+          console.warn(`[SUCCESS PAGE] Payment status: ${order?.paymentStatus}`);
+          setPaymentStatus(order?.paymentStatus || "pending");
+        }
+      } catch (error) {
+        console.error("[SUCCESS PAGE] Error fetching order:", error.message);
+        setOrderDetails({
+          orderId: orderId,
+          transactionId: "TXN-XXXXXX",
+          amount: "0",
+          timestamp: new Date().toLocaleString(),
+        });
+        setPaymentStatus("error");
+      }
+
+      setVerifying(false);
+    };
+
+    verifyPayment();
   }, [searchParams]);
 
   return (
@@ -53,12 +122,12 @@ const PaymentSuccess = () => {
                       {orderDetails.orderId}
                     </span>
                   </div>
-                  <div className="border-t pt-4 flex justify-between">
+                  {/* <div className="border-t pt-4 flex justify-between">
                     <span className="text-gray-600">Transaction ID:</span>
                     <span className="font-semibold text-gray-900">
                       {orderDetails.transactionId}
                     </span>
-                  </div>
+                  </div> */}
                   <div className="border-t pt-4 flex justify-between">
                     <span className="text-gray-600">Amount Paid:</span>
                     <span className="font-semibold text-green-600 text-lg">
@@ -83,12 +152,26 @@ const PaymentSuccess = () => {
                 </p>
               </div>
 
-              {/* Success Message */}
-              <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
-                <p className="text-green-700 text-center font-medium">
-                  ✓ Your payment has been processed securely
-                </p>
-              </div>
+              {/* Status Message */}
+              {verifying ? (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+                  <p className="text-blue-700 text-center font-medium">
+                    ⏳ Verifying payment status with server...
+                  </p>
+                </div>
+              ) : paymentStatus === "confirmed" ? (
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-8">
+                  <p className="text-green-700 text-center font-medium">
+                    ✓ Payment confirmed with server
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-yellow-50 border border-white-200 rounded-lg p-4 mb-8">
+                  {/* <p className="text-yellow-700 text-center font-medium">
+                    ⚠ Payment status: {paymentStatus}
+                  </p> */}
+                </div>
+              )}
 
               {/* Actions */}
               <div className="flex gap-4 flex-col sm:flex-row">

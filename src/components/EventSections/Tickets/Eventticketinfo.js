@@ -1,201 +1,182 @@
 import React, { useState } from "react";
-import { createOrder, getPayFastToken, initializePayFastPayment, debugPayFastFormData } from "../../../api/orderApi.js"; // adjust path as needed
+import {
+  createOrder,
+  getPayFastToken,
+  initializePayFastPayment,
+  debugPayFastFormData,
+} from "../../../api/orderApi.js"; // adjust path as needed
 const EventTicketInfo = () => {
+  const handleCheckout = async () => {
+    try {
+      // Validate required fields
+      if (!accountInfo.name.trim()) {
+        alert("Please enter your name");
+        return;
+      }
+      if (!accountInfo.phone.trim()) {
+        alert("Please enter your phone number");
+        return;
+      }
 
+      // Collect all ticket holder names in order
+      const allTickets = getAllTickets();
+      const collectedNames = allTickets.map(
+        (ticket) =>
+          ticketHolderNames[`${ticket.day}-${ticket.type}-${ticket.index}`] ||
+          ""
+      );
 
-const handleCheckout = async () => {
-  try {
-    // Validate required fields
-    if (!accountInfo.name.trim()) {
-      alert("Please enter your name");
-      return;
-    }
-    if (!accountInfo.phone.trim()) {
-      alert("Please enter your phone number");
-      return;
-    }
+      // Check if all names are filled
+      if (collectedNames.some((name) => !name.trim())) {
+        alert("Please fill in names for all ticket holders");
+        return;
+      }
 
-    // Collect all ticket holder names in order
-    const allTickets = getAllTickets();
-    const collectedNames = allTickets.map((ticket) =>
-      ticketHolderNames[`${ticket.day}-${ticket.type}-${ticket.index}`] || ""
-    );
+      // Convert tickets object into an array suitable for backend
+      const ticketsPurchased = [];
+      let nameIndex = 0;
 
-    // Check if all names are filled
-    if (collectedNames.some(name => !name.trim())) {
-      alert("Please fill in names for all ticket holders");
-      return;
-    }
+      Object.keys(tickets).forEach((dayKey) => {
+        const dayTickets = tickets[dayKey];
+        const eventDay = parseInt(dayKey.replace("day", "")); // day1 -> 1, day2 -> 2, etc.
 
-    // Convert tickets object into an array suitable for backend
-    const ticketsPurchased = [];
-    let nameIndex = 0;
+        Object.keys(dayTickets).forEach((typeKey) => {
+          const quantity = dayTickets[typeKey];
+          if (quantity > 0) {
+            // Collect names for this ticket type
+            const ticketNames = [];
+            for (let i = 0; i < quantity; i++) {
+              ticketNames.push(collectedNames[nameIndex++]);
+            }
 
-    Object.keys(tickets).forEach((dayKey) => {
-      const dayTickets = tickets[dayKey];
-      const eventDay = parseInt(dayKey.replace("day", "")); // day1 -> 1, day2 -> 2, etc.
-
-      Object.keys(dayTickets).forEach((typeKey) => {
-        const quantity = dayTickets[typeKey];
-        if (quantity > 0) {
-          // Collect names for this ticket type
-          const ticketNames = [];
-          for (let i = 0; i < quantity; i++) {
-            ticketNames.push(collectedNames[nameIndex++]);
+            ticketsPurchased.push({
+              eventDay,
+              ticketType: typeKey, // e.g., vip, goldEarlyBird
+              quantity,
+              names: ticketNames,
+              price: ticketPrices[dayKey][typeKey], // take price from your ticketPrices mapping
+            });
           }
-
-          ticketsPurchased.push({
-            eventDay,
-            ticketType: typeKey, // e.g., vip, goldEarlyBird
-            quantity,
-            names: ticketNames,
-            price: ticketPrices[dayKey][typeKey] // take price from your ticketPrices mapping
-          });
-        }
+        });
       });
-    });
 
-    // Prepare order data
-    const orderData = {
-      userName: accountInfo.name,
-      userPhone: accountInfo.phone,
-      totalAmount: calculateTotal(),
-      ticketsPurchased
-    };
+      // Prepare order data
+      const orderData = {
+        userName: accountInfo.name,
+        userPhone: accountInfo.phone,
+        totalAmount: calculateTotal(),
+        ticketsPurchased,
+      };
 
-    // Step 1: Create order
-    console.log("Creating order...", orderData);
-    const orderResponse = await createOrder(orderData);
-    console.log("Order created:", orderResponse);
+      // Step 1: Create order
+      console.log("[PAYMENT] Step 1: Creating order...");
+      const orderResponse = await createOrder(orderData);
+      console.log(`[PAYMENT] Order created successfully - Order ID: ${orderResponse.order.orderId}`);
 
-    if (!orderResponse?.order?.orderId) {
-      console.error("Order ID not received from backend");
-      alert("Something went wrong: Order ID not received.");
-      return;
-    }
+      if (!orderResponse?.order?.orderId) {
+        console.error("[PAYMENT] ERROR: Order ID not received from backend");
+        alert("Something went wrong: Order ID not received.");
+        return;
+      }
 
-    // Step 2: Get PayFast access token
-    const orderId = orderResponse.order.orderId;
-    const totalAmount = calculateTotal();
-    console.log("Getting PayFast token for order:", orderId, "Amount:", totalAmount);
-    debugger
-    const tokenResponse = await getPayFastToken(orderId, totalAmount);
-    debugger
-    console.log("PayFast token received:", tokenResponse);
+      // Step 2: Get PayFast access token
+      const orderId = orderResponse.order.orderId;
+      const totalAmount = calculateTotal();
+      console.log(`[PAYMENT] Step 2: Getting PayFast token for Order: ${orderId}, Amount: PKR ${totalAmount}`);
 
-    if (!tokenResponse?.token) {
-      console.error("Token not received from PayFast");
-      alert("Something went wrong: Could not get payment token.");
-      return;
-    }
+      const tokenResponse = await getPayFastToken(orderId, totalAmount);
+      console.log(`[PAYMENT] Token received successfully for Order: ${orderId}`);
 
-    // Step 3: Initialize PayFast payment with token
-    const token = tokenResponse.token;
-    console.log("Initializing PayFast payment with token for order:", orderId);
-    debugger
-    const paymentResponse = await initializePayFastPayment(orderId, token);
-    console.log("PayFast payment initialized:", paymentResponse);
+      if (!tokenResponse?.token) {
+        console.error("Token not received from PayFast");
+        alert("Something went wrong: Could not get payment token.");
+        return;
+      }
 
-    // Step 4: Submit form to PayFast checkout URL
-    if (paymentResponse?.checkoutUrl && paymentResponse?.formData) {
-      console.log("PayFast Checkout URL:", paymentResponse.checkoutUrl);
-      console.log("PayFast Form Data:", paymentResponse.formData);
+      // Step 3: Initialize PayFast payment with token
+      const token = tokenResponse.token;
+      console.log(`[PAYMENT] Step 3: Initializing PayFast payment for Order: ${orderId}`);
 
-      // Debug: Log form data structure for signature validation
-      debugPayFastFormData(paymentResponse.formData);
+      const paymentResponse = await initializePayFastPayment(orderId, token);
+      console.log(`[PAYMENT] Payment initialized - ready to redirect to PayFast`);
 
-    // Validate required fields before submission (PayFast Pakistan fields)
-const requiredFields = [
-  "MERCHANT_ID",
-  "TOKEN",        // ✅ we now expect TOKEN from backend
-  "TXNAMT",
-  "BASKET_ID",
-  "MERCHANT_NAME",
-];
+      // Step 4: Submit form to PayFast checkout URL
+      if (paymentResponse?.checkoutUrl && paymentResponse?.formData) {
+        console.log("PayFast Checkout URL:", paymentResponse.checkoutUrl);
+        console.log("PayFast Form Data:", paymentResponse.formData);
 
-const missingFields = requiredFields.filter(
-  (field) =>
-    !paymentResponse.formData[field] ||
-    paymentResponse.formData[field] === ""
-);
+        // Debug: Log form data structure for signature validation
+        debugPayFastFormData(paymentResponse.formData);
 
-if (missingFields.length > 0) {
-  console.error("Missing required PayFast fields:", missingFields);
-  alert(
-    `Error: Missing payment fields (${missingFields.join(
-      ", "
-    )}). Please contact support.`
-  );
-  return;
-}
+        // Validate required fields before submission (PayFast Pakistan fields)
+        const requiredFields = [
+          "MERCHANT_ID",
+          "TOKEN", // ✅ we now expect TOKEN from backend
+          "TXNAMT",
+          "BASKET_ID",
+          "MERCHANT_NAME",
+        ];
 
-
-      // IMPORTANT: Form submission is DISABLED for debugging
-      // To enable auto-redirect to PayFast, uncomment the form.submit() line below
-
-      console.log("============================================");
-      console.log("PAYFAST CHECKOUT READY");
-      console.log("============================================");
-      console.log("Checkout URL:", paymentResponse.checkoutUrl);
-      console.log("Form Data:", paymentResponse.formData);
-      console.log("============================================");
-      console.log("To verify form data, check the console above");
-      console.log("All fields look correct? Ready to submit?");
-      console.log("============================================\n");
-
-      // Create a hidden form to submit to PayFast
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = paymentResponse.checkoutUrl;
-      form.enctype = "application/x-www-form-urlencoded";
-      form.style.display = "none";
-      form.target = "_blank"; // Ensure form submits in same tab
-
-      // Add all form data as hidden inputs
-      Object.keys(paymentResponse.formData).forEach((key) => {
-        const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = String(paymentResponse.formData[key]).trim();
-        form.appendChild(input);
-        console.log(
-          `Form field: ${key} = ${paymentResponse.formData[key]} (length: ${String(paymentResponse.formData[key]).length})`
+        const missingFields = requiredFields.filter(
+          (field) =>
+            !paymentResponse.formData[field] ||
+            paymentResponse.formData[field] === ""
         );
-      });
 
-      // Append form to body
-      document.body.appendChild(form);
-      console.log("Form element created with", form.children.length, "inputs");
+        if (missingFields.length > 0) {
+          console.error("Missing required PayFast fields:", missingFields);
+          alert(
+            `Error: Missing payment fields (${missingFields.join(
+              ", "
+            )}). Please contact support.`
+          );
+          return;
+        }
 
-      // ENABLED: Auto-submit to PayFast
-      console.log("\n✅ SUBMITTING FORM TO PAYFAST...");
-      console.log("Redirecting to PayFast payment gateway...");
+        // IMPORTANT: Form submission is DISABLED for debugging
+        // To enable auto-redirect to PayFast, uncomment the form.submit() line below
 
-      // TEST MODE: Uncomment to test success/cancel pages without PayFast
-      // const testMode = true;
-      // if (testMode) {
-      //   const transactionId = `TXN-${Date.now()}`;
-      //   const mode = window.confirm("Click OK for Success, Cancel for Failure");
-      //   if (mode) {
-      //     window.location.href = `/success?orderId=${orderId}&transactionId=${transactionId}&amount=${totalAmount}`;
-      //   } else {
-      //     window.location.href = `/cancel?orderId=${orderId}&reason=Payment+cancelled+by+user`;
-      //   }
-      //   return;
-      // }
+        console.log("[PAYMENT] Step 4: Form ready - submitting to PayFast gateway...");
 
-      form.submit();
-    } else {
-      console.error("Checkout URL or form data not returned from payment initialization");
-      console.error("Response:", paymentResponse);
-      alert("Something went wrong: Payment checkout data not received. Please try again.");
+        // Create a hidden form to submit to PayFast
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = paymentResponse.checkoutUrl;
+        form.enctype = "application/x-www-form-urlencoded";
+        form.style.display = "none";
+        form.target = "_blank"; // Ensure form submits in same tab
+
+        // Add all form data as hidden inputs
+        Object.keys(paymentResponse.formData).forEach((key) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = key;
+          input.value = String(paymentResponse.formData[key]).trim();
+          form.appendChild(input);
+        });
+
+        // Save orderId to localStorage as fallback (in case backend doesn't include it in redirect URL)
+        localStorage.setItem("lastOrderId", orderId);
+        console.log(`[PAYMENT] Step 5: Saved orderId to localStorage: ${orderId}`);
+
+        // Append form to body and submit
+        document.body.appendChild(form);
+        console.log(`[PAYMENT] Step 6: Submitting form to PayFast gateway...`);
+        form.submit();
+      } else {
+        console.error(
+          "Checkout URL or form data not returned from payment initialization"
+        );
+        console.error("Response:", paymentResponse);
+        alert(
+          "Something went wrong: Payment checkout data not received. Please try again."
+        );
+      }
+    } catch (error) {
+      console.error("[PAYMENT] ERROR during checkout:", error);
+      alert("Something went wrong during checkout. Please try again.");
     }
-  } catch (error) {
-    console.error("Checkout failed:", error);
-    alert("Something went wrong during checkout. Please try again.");
-  }
-};
-
+  };
 
   const [tickets, setTickets] = useState({
     day1: { vip: 0, gold: 0, standard: 0, couple: 0, groupFour: 0 },
@@ -226,7 +207,7 @@ if (missingFields.length > 0) {
     day1: {
       vip: 2500,
       gold: 1500,
-      standard: 1000,
+      standard: 100,
       couple: 1800,
       groupFour: 3500,
     },
@@ -1495,8 +1476,6 @@ if (missingFields.length > 0) {
                   placeholder="Enter your full name"
                 />
               </div>
-
-             
 
               <div>
                 <label className="block text-lg font-semibold text-gray-800 mb-2">
