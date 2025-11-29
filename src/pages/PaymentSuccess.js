@@ -73,6 +73,17 @@ const PaymentSuccess = () => {
           console.warn(`[SUCCESS PAGE] Payment status: ${order?.paymentStatus}`);
           setPaymentStatus(order?.paymentStatus || "pending");
         }
+
+        // Update order status to paid on success page
+        try {
+          console.log(`[SUCCESS PAGE] Updating payment status for Order: ${orderId}`);
+          await axios.post(`${backendUrl}/api/payfast/update-status`, {
+            orderId: orderId,
+          });
+          console.log(`[SUCCESS PAGE] Payment status updated successfully`);
+        } catch (err) {
+          console.warn("[SUCCESS PAGE] Could not update payment status:", err.message);
+        }
       } catch (error) {
         console.error("[SUCCESS PAGE] Error fetching order:", error.message);
         setOrderDetails({
